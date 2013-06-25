@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ListViewController : UITableViewController <NSURLConnectionDataDelegate>
+@interface ListViewController : UITableViewController <NSURLConnectionDataDelegate, NSXMLParserDelegate>
 
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) NSMutableData *xmlData;

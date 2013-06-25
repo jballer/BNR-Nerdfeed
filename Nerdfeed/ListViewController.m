@@ -58,9 +58,24 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)conn
 {
 	// Check that we're getting the right data
-	NSString *xmlCheck = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
+//	NSString *xmlCheck = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
+//	NSLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
 	
-	NSLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
+	// Set up a parser
+	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:self.xmlData];
+	
+	// Give it a delegate
+	parser.delegate = self;
+	
+	// Start parsing
+	[parser parse];
+	
+	// Clean up
+	self.xmlData = nil;
+	self.connection = nil;
+
+	// Refresh the table data
+	[self.tableView reloadData];
 }
 
 - (void)connection:(NSURLConnection *)connection
@@ -83,6 +98,31 @@
 											   cancelButtonTitle:@"OK"
 											   otherButtonTitles:nil];
 	[errorAlert show];
+}
+
+#pragma mark <NSXMLParserDelegate>
+
+/*
+ Parse the RSS feed…
+ 
+ <title> or <description> --> RSSChannel
+ <item> --> RSSItem --> RSSChannel's 'items' array
+ 
+ */
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
+{
+	
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+	
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+{
+	
 }
 
 #pragma mark <UITableViewDataSource>
