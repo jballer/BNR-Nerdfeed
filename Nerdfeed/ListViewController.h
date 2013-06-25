@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @class RSSChannel, WebViewController;
 
-@interface ListViewController : UITableViewController <NSURLConnectionDataDelegate, NSXMLParserDelegate>
+@interface ListViewController : UITableViewController
+<NSURLConnectionDataDelegate, NSXMLParserDelegate, NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) NSMutableData *xmlData;

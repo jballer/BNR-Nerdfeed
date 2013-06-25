@@ -124,7 +124,7 @@
 	
 	if ([elementName isEqualToString:@"channel"]) {
 		// Store the channel
-		self.channel = [[RSSChannel alloc] init];
+		self.channel = [NSEntityDescription insertNewObjectForEntityForName:@"RSSChannel" inManagedObjectContext:self.managedObjectContext];
 		
 		// Give it a pointer back to here
 		self.channel.parentParserDelegate = self;
@@ -144,6 +144,30 @@
 	
 }
 
+#pragma mark -
+#pragma mark Fetched results controller
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+	if(_fetchedResultsController)
+		return _fetchedResultsController;
+	
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"RSSItem" inManagedObjectContext:self.managedObjectContext];
+	request.entity = entity;
+	
+	NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
+	request.sortDescriptors = @[descriptor];
+	
+	_fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+	
+	NSError *error = [NSError new];
+	[_fetchedResultsController performFetch:&error];
+	
+	return _fetchedResultsController;
+}
+
 #pragma mark <UITableViewDataSource>
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -155,16 +179,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	static NSDateFormatter *formatter = nil;
+	
+	if (!formatter) {
+		formatter = [[NSDateFormatter alloc] init];
+		[formatter setDateStyle:NSDateFormatterMediumStyle];
+		[formatter setTimeStyle:NSDateFormatterShortStyle];
+	}
+	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
 	
 	if (!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
 									  reuseIdentifier:@"UITableViewCell"];
 	}
 	
-	RSSItem *item = [self.channel.items objectAtIndex:[indexPath row]];
+	RSSItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	
 	cell.textLabel.text = item.title;
+	cell.detailTextLabel.text = [formatter stringFromDate:item.date];
 	
 	return cell;
 }
@@ -175,7 +208,7 @@
 {
 	[self.navigationController pushViewController:self.webViewController animated:YES];
 	
-	RSSItem *item = self.channel.items[indexPath.row];
+	RSSItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:item.link]];
 	
 	[self.webViewController.webView loadRequest:request];

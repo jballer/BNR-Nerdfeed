@@ -7,16 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface RSSChannel : NSObject <NSXMLParserDelegate>
-{
-	NSMutableString *currentString;
-}
+
+@interface RSSChannel : NSManagedObject <NSXMLParserDelegate>
 
 @property (nonatomic, weak) id<NSXMLParserDelegate> parentParserDelegate;
 
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *infoString;
-@property (nonatomic, readonly, strong) NSMutableArray *items;
+@property (nonatomic, retain) NSString * infoString;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSSet *items;
+@end
+
+@interface RSSChannel (CoreDataGeneratedAccessors)
+
+- (void)addItemsObject:(NSManagedObject *)value;
+- (void)removeItemsObject:(NSManagedObject *)value;
+- (void)addItems:(NSSet *)values;
+- (void)removeItems:(NSSet *)values;
 
 @end

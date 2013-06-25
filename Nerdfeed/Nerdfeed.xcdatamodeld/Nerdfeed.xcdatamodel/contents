@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="RSSChannel" representedClassName="RSSChannel" syncable="YES">
+        <attribute name="infoString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RSSItem" inverseName="channel" inverseEntity="RSSItem" syncable="YES"/>
+    </entity>
+    <entity name="RSSItem" representedClassName="RSSItem" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="channel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RSSChannel" inverseName="items" inverseEntity="RSSChannel" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="RSSChannel" positionX="-288" positionY="198" width="128" height="90"/>
+        <element name="RSSItem" positionX="-81" positionY="183" width="128" height="105"/>
+    </elements>
+</model>

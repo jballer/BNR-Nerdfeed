@@ -10,6 +10,14 @@
 #import "ListViewController.h"
 #import "WebViewController.h"
 
+@interface NFAppDelegate ()
+
+@property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+@end
+
 @implementation NFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -18,11 +26,13 @@
     // Override point for customization after application launch.
 	
 	ListViewController *lvc = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
-	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lvc];
-
+	lvc.managedObjectContext = self.managedObjectContext;
+	
+	
 	WebViewController *wvc = [[WebViewController alloc] init];
 	lvc.webViewController = wvc;
-	
+
+	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lvc];
 	self.window.rootViewController = nav;
 	
     self.window.backgroundColor = [UIColor whiteColor];
@@ -52,9 +62,90 @@
 	// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
+- (void)applicationWillTerminate:(UIApplication *)application {
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+	
+    NSError *error = nil;
+	if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
+		/*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	}
+}
+
+#pragma mark -
+#pragma mark Core Data stack
+
+- (NSManagedObjectContext *) managedObjectContext {
+	
+    if (_managedObjectContext)
+	{
+        return _managedObjectContext;
+	}
+	
+    NSPersistentStoreCoordinator *coordinator = self.persistentStoreCoordinator;
+    if (coordinator)
+	{
+        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext.persistentStoreCoordinator = coordinator;
+    }
+	
+    return _managedObjectContext;
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+	
+    if (_managedObjectModel != nil)
+	{
+        return _managedObjectModel;
+    }
+	
+    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    return _managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+	
+    if (_persistentStoreCoordinator) {
+        return _persistentStoreCoordinator;
+    }
+	
+    NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"Nerdfeed.sqlite"]];
+	
+	BOOL firstRun = NO;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[storeUrl path] isDirectory:NULL]) {
+		firstRun = YES;
+	}
+	
+	NSError *error = nil;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
+	
+	if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+												   configuration:nil
+															 URL:storeUrl
+														 options:nil
+														   error:&error]) {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	}
+	
+    return _persistentStoreCoordinator;
+}
+
+#pragma mark -
+#pragma mark Application's Documents directory
+
+- (NSString *)applicationDocumentsDirectory {
+	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
 @end

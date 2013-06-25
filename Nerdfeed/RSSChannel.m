@@ -9,16 +9,19 @@
 #import "RSSChannel.h"
 #import "RSSItem.h"
 
+@interface RSSChannel ()
+{
+	NSMutableString *currentString;
+}
+@end
+
 @implementation RSSChannel
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        _items = [NSMutableArray array];
-    }
-    return self;
-}
+@synthesize parentParserDelegate;
+
+@dynamic infoString;
+@dynamic title;
+@dynamic items;
 
 #pragma mark <NSXMLParserDelegate>
 
@@ -50,12 +53,12 @@
 	}
 	else if ([elementName isEqualToString:@"item"])
 	{
-		RSSItem *item = [RSSItem new];
+		RSSItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"RSSItem" inManagedObjectContext:self.managedObjectContext];
 		item.parentParserDelegate = self;
-
+		
 		[parser setDelegate:item];
 		
-		[self.items addObject:item];
+		[self addItemsObject:item];
 	}
 }
 
@@ -75,8 +78,31 @@
 	if ([elementName isEqualToString:@"channel"]) {
 		[parser setDelegate:self.parentParserDelegate];
 		
-		NSLog(@"\n %@", _items);
+		NSLog(@"\n %@", self.items);
 	}
 }
+
+/*
+#pragma mark CoreDataGeneratedAccessors
+- (void)addItemsObject:(NSManagedObject *)value
+{
+	
+}
+
+- (void)removeItemsObject:(NSManagedObject *)value
+{
+	
+}
+
+- (void)addItems:(NSSet *)values
+{
+	
+}
+
+- (void)removeItems:(NSSet *)values
+{
+	
+}
+*/
 
 @end
