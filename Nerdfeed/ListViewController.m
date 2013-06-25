@@ -7,6 +7,8 @@
 //
 
 #import "ListViewController.h"
+#import "RSSChannel.h"
+#import "RSSItem.h"
 
 @implementation ListViewController
 
@@ -76,6 +78,8 @@
 
 	// Refresh the table data
 	[self.tableView reloadData];
+	
+	NSLog(@"%@\n %@\n %@\n", _channel, _channel.title, _channel.infoString);
 }
 
 - (void)connection:(NSURLConnection *)connection
@@ -110,9 +114,23 @@
  
  */
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI
+ qualifiedName:(NSString *)qualifiedName
+	attributes:(NSDictionary *)attributeDict
 {
+	NSLog(@"%@ found a %@ element",self,elementName);
 	
+	if ([elementName isEqualToString:@"channel"]) {
+		// Store the channel
+		self.channel = [[RSSChannel alloc] init];
+		
+		// Give it a pointer back to here
+		self.channel.parentParserDelegate = self;
+		
+		// Set it as the parser's delegate
+		parser.delegate = self.channel;
+	}
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
@@ -127,15 +145,27 @@
 
 #pragma mark <UITableViewDataSource>
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return 0;
+	NSLog(@"\n\nCOUNT: %d", self.channel.items.count);
+	return self.channel.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return nil;
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+	
+	if (!cell) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+									  reuseIdentifier:@"UITableViewCell"];
+	}
+	
+	RSSItem *item = [self.channel.items objectAtIndex:[indexPath row]];
+	
+	cell.textLabel.text = item.title;
+	
+	return cell;
 }
 
 @end
