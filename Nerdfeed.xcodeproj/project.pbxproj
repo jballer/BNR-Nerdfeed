@@ -19,6 +19,7 @@
 		50585FF51779551A00DD4A65 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50585FF41779551A00DD4A65 /* ListViewController.m */; };
 		50C9EBA717795FD100F8B158 /* RSSChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C9EBA617795FD100F8B158 /* RSSChannel.m */; };
 		50C9EBAA17795FD900F8B158 /* RSSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C9EBA917795FD900F8B158 /* RSSItem.m */; };
+		50C9EBAD17796E1900F8B158 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C9EBAC17796E1900F8B158 /* WebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		50C9EBA617795FD100F8B158 /* RSSChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSChannel.m; sourceTree = "<group>"; };
 		50C9EBA817795FD900F8B158 /* RSSItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSItem.h; sourceTree = "<group>"; };
 		50C9EBA917795FD900F8B158 /* RSSItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSItem.m; sourceTree = "<group>"; };
+		50C9EBAB17796E1900F8B158 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = ../WebViewController.h; sourceTree = "<group>"; };
+		50C9EBAC17796E1900F8B158 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ../WebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,14 +90,16 @@
 		50585FDC177954F100DD4A65 /* Nerdfeed */ = {
 			isa = PBXGroup;
 			children = (
+				50585FE5177954F200DD4A65 /* NFAppDelegate.h */,
+				50585FE6177954F200DD4A65 /* NFAppDelegate.m */,
 				50585FF31779551A00DD4A65 /* ListViewController.h */,
 				50585FF41779551A00DD4A65 /* ListViewController.m */,
 				50C9EBA517795FD100F8B158 /* RSSChannel.h */,
 				50C9EBA617795FD100F8B158 /* RSSChannel.m */,
 				50C9EBA817795FD900F8B158 /* RSSItem.h */,
 				50C9EBA917795FD900F8B158 /* RSSItem.m */,
-				50585FE5177954F200DD4A65 /* NFAppDelegate.h */,
-				50585FE6177954F200DD4A65 /* NFAppDelegate.m */,
+				50C9EBAB17796E1900F8B158 /* WebViewController.h */,
+				50C9EBAC17796E1900F8B158 /* WebViewController.m */,
 				50585FDD177954F100DD4A65 /* Supporting Files */,
 			);
 			path = Nerdfeed;
@@ -185,6 +190,7 @@
 				50585FF51779551A00DD4A65 /* ListViewController.m in Sources */,
 				50C9EBA717795FD100F8B158 /* RSSChannel.m in Sources */,
 				50C9EBAA17795FD900F8B158 /* RSSItem.m in Sources */,
+				50C9EBAD17796E1900F8B158 /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

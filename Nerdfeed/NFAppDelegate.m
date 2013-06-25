@@ -8,6 +8,7 @@
 
 #import "NFAppDelegate.h"
 #import "ListViewController.h"
+#import "WebViewController.h"
 
 @implementation NFAppDelegate
 
@@ -19,6 +20,9 @@
 	ListViewController *lvc = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
 	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lvc];
 
+	WebViewController *wvc = [[WebViewController alloc] init];
+	lvc.webViewController = wvc;
+	
 	self.window.rootViewController = nav;
 	
     self.window.backgroundColor = [UIColor whiteColor];

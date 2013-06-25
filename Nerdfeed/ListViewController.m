@@ -9,6 +9,7 @@
 #import "ListViewController.h"
 #import "RSSChannel.h"
 #import "RSSItem.h"
+#import "WebViewController.h"
 
 @implementation ListViewController
 
@@ -60,8 +61,8 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)conn
 {
 	// Check that we're getting the right data
-//	NSString *xmlCheck = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
-//	NSLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
+	NSString *xmlCheck = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
+	NSLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
 	
 	// Set up a parser
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:self.xmlData];
@@ -166,6 +167,18 @@
 	cell.textLabel.text = item.title;
 	
 	return cell;
+}
+
+#pragma mark <UITableViewDelegate>
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	[self.navigationController pushViewController:self.webViewController animated:YES];
+	
+	RSSItem *item = self.channel.items[indexPath.row];
+	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:item.link]];
+	
+	[self.webViewController.webView loadRequest:request];
 }
 
 @end
