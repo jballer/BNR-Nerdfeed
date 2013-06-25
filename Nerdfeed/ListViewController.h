@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ListViewController : UITableViewController
-{
-	NSURLConnection *connection;
-	NSMutableData *xmlData;
-}
+@interface ListViewController : UITableViewController <NSURLConnectionDataDelegate>
+
+@property (nonatomic, strong) NSURLConnection *connection;
+@property (nonatomic, strong) NSMutableData *xmlData;
 
 - (void)fetchEntries;
 

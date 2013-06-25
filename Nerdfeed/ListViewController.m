@@ -10,10 +10,11 @@
 
 @implementation ListViewController
 
-- (id)init
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super init];
+    self = [super initWithStyle:style];
     if (self) {
+		// Kick off the asynchronous data fetch
         [self fetchEntries];
     }
     return self;
@@ -24,7 +25,7 @@
 	// Connect to forums.bignerdranch.com and get last 20 posts in RSS2.0 format
 	
 	// Data Container
-	xmlData = [[NSMutableData alloc] init];
+	self.xmlData = [[NSMutableData alloc] init];
 	
 	// URL
 	NSURL *url = [NSURL URLWithString:
@@ -38,9 +39,50 @@
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	
 	// Create a connection with the request
-	connection = [NSURLConnection connectionWithRequest:request delegate:self];
+	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	// (BNR says to use alloc initWithRequest:delegate:startImmediately:)
+}
+
+#pragma mark <NSURLConnectionDataDelegate>
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+	// Add the incoming data to the container.
+	// (It's always in the right order)
+	[self.xmlData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)conn
+{
+	// Check that we're getting the right data
+	NSString *xmlCheck = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
 	
+	NSLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
+}
+
+- (void)connection:(NSURLConnection *)connection
+  didFailWithError:(NSError *)error
+{
+	// Release the connection object
+	self.connection = nil;
+	
+	// Release the data object
+	self.xmlData = nil;
+	
+	// Get the error details that were passed to us
+	NSString *errorString = [NSString stringWithFormat:@"Fetch Failed: %@",
+							 [error localizedDescription]];
+	
+	// Show an alert with the error
+	UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
+														 message:errorString
+														delegate:self
+											   cancelButtonTitle:@"OK"
+											   otherButtonTitles:nil];
+	[errorAlert show];
 }
 
 #pragma mark <UITableViewDataSource>
