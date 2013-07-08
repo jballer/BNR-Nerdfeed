@@ -11,6 +11,8 @@
 #import "RSSItem.h"
 #import "WebViewController.h"
 
+//TODO: Bronze Challenge - UITableViewCell with 3 labels
+
 @implementation ListViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -24,9 +26,7 @@
 }
 
 - (void)fetchEntries
-{
-	// Connect to forums.bignerdranch.com and get last 20 posts in RSS2.0 format
-	
+{	
 	// Data Container
 	self.xmlData = [[NSMutableData alloc] init];
 	
@@ -144,8 +144,7 @@
 	
 }
 
-#pragma mark -
-#pragma mark Fetched results controller
+#pragma mark - Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController
 {

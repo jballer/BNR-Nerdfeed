@@ -22,18 +22,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	BOOL webViewDebug = true;
+	
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-	
+
 	ListViewController *lvc = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
 	lvc.managedObjectContext = self.managedObjectContext;
-	
 	
 	WebViewController *wvc = [[WebViewController alloc] init];
 	lvc.webViewController = wvc;
 
 	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lvc];
 	self.window.rootViewController = nav;
+	
+	//TODO: remove web view debug code
+	if (webViewDebug) {
+		nav.viewControllers = @[wvc];
+	}
 	
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -77,8 +83,7 @@
 	}
 }
 
-#pragma mark -
-#pragma mark Core Data stack
+#pragma mark - Core Data stack
 
 - (NSManagedObjectContext *) managedObjectContext {
 	
@@ -141,8 +146,7 @@
     return _persistentStoreCoordinator;
 }
 
-#pragma mark -
-#pragma mark Application's Documents directory
+#pragma mark - Application's Documents directory
 
 - (NSString *)applicationDocumentsDirectory {
 	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];

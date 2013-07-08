@@ -24,6 +24,9 @@
 
 @property (nonatomic, strong) WebViewController *webViewController;
 
+/**
+ Connect to forums.bignerdranch.com and get last 20 posts in RSS2.0 format.
+ */
 - (void)fetchEntries;
 
 @end
