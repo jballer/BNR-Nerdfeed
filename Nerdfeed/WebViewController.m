@@ -7,11 +7,14 @@
 //
 
 #import "WebViewController.h"
+#import "RSSItem.h"
 
 @interface WebViewController ()
 {
 	UIBarButtonItem *backButton;
 	UIBarButtonItem *forwardButton;
+	
+	__weak UIPopoverController *popover;
 }
 @end
 
@@ -23,13 +26,13 @@
 	
 	// Set up the content view with autolayout
 	UIView *contentView = [UIView new];
-	contentView.backgroundColor = [UIColor redColor];
+//	contentView.backgroundColor = [UIColor redColor];
 	
 	// Set up the Web View
 	_webView = [UIWebView new];
 	_webView.delegate = self;
 	_webView.scalesPageToFit = YES;
-	_webView.backgroundColor = [UIColor yellowColor];
+//	_webView.backgroundColor = [UIColor yellowColor];
 	_webView.translatesAutoresizingMaskIntoConstraints = NO;
 	[contentView addSubview:_webView];
 	
@@ -41,7 +44,7 @@
 	
 	// Set up the Toolbar with back/forward buttons
 	UIToolbar *toolbar = [UIToolbar new];
-	toolbar.backgroundColor = [UIColor blueColor];
+//	toolbar.backgroundColor = [UIColor blueColor];
 	toolbar.translatesAutoresizingMaskIntoConstraints = NO;
 	[toolbar setItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
 																	   target:nil action:nil],
@@ -95,6 +98,21 @@
 	forwardButton.enabled = self.webView.canGoForward;
 }
 
+#pragma mark - List View Delegate
+
+- (void)listViewController:(ListViewController *)lvc handleObject:(id)object
+{
+	if ([object isKindOfClass:[RSSItem class]]) {
+		RSSItem *item = object;
+		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:item.link]];
+		[self.webView loadRequest:request];
+		self.navigationItem.title = item.title;
+		if (popover) {
+			[popover dismissPopoverAnimated:YES];
+		}
+	}
+}
+
 #pragma mark - Web View Delegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -121,6 +139,7 @@
 {
 	barButtonItem.title = @"Discussion List";
 	[self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
+	popover = pc;
 }
 
 - (void)splitViewController:(UISplitViewController *)svc

@@ -212,11 +212,9 @@
 	if (!self.splitViewController) {
 		[self.navigationController pushViewController:self.webViewController animated:YES];
 	}
-
 	RSSItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:item.link]];
-	
-	[self.webViewController.webView loadRequest:request];
+
+	[self.webViewController listViewController:self handleObject:item];
 }
 
 @end

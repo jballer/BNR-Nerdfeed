@@ -30,3 +30,13 @@
 - (void)fetchEntries;
 
 @end
+
+@protocol ListViewControllerDelegate
+
+/**
+ This method is called when the delegate should present the object passed,
+ usually as the result of user selection.
+ */
+- (void)listViewController:(ListViewController *)lvc handleObject:(id)object;
+
+@end

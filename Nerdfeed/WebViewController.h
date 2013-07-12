@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ListViewController.h"
 
-@interface WebViewController : UIViewController <UIWebViewDelegate, UISplitViewControllerDelegate>
+@interface WebViewController : UIViewController <UIWebViewDelegate, UISplitViewControllerDelegate, ListViewControllerDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIToolbar *toolbar;
