@@ -119,6 +119,7 @@
 		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
 	   forPopoverController:(UIPopoverController *)pc
 {
+	barButtonItem.title = @"Discussion List";
 	[self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
 }
 
