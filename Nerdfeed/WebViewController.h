@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WebViewController : UIViewController <UIWebViewDelegate>
+@interface WebViewController : UIViewController <UIWebViewDelegate, UISplitViewControllerDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIToolbar *toolbar;

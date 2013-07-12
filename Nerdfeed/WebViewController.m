@@ -71,7 +71,7 @@
 
 - (void)viewDidLayoutSubviews
 {
-	NSLog(@"%@",self.view);
+	MyLog(@"%@",self.view);
 }
 
 - (void)goBack:(id)sender
@@ -95,7 +95,7 @@
 	forwardButton.enabled = self.webView.canGoForward;
 }
 
-#pragma mark <UIWebViewDelegate>
+#pragma mark - Web View Delegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
@@ -112,4 +112,20 @@
 	[self resetWebNavigationButtons];
 }
 
+#pragma mark - Split View Delegate
+
+- (void)splitViewController:(UISplitViewController *)svc
+	 willHideViewController:(UIViewController *)aViewController
+		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
+	   forPopoverController:(UIPopoverController *)pc
+{
+	[self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
+}
+
+- (void)splitViewController:(UISplitViewController *)svc
+	 willShowViewController:(UIViewController *)aViewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
+}
 @end

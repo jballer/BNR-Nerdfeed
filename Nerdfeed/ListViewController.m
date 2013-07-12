@@ -19,6 +19,8 @@
 {
     self = [super initWithStyle:style];
     if (self) {
+		self.navigationItem.title = @"RSS";
+		
 		// Kick off the asynchronous data fetch
         [self fetchEntries];
     }
@@ -62,7 +64,8 @@
 {
 	// Check that we're getting the right data
 	NSString *xmlCheck = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
-	NSLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
+	
+	MyLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
 	
 	// Set up a parser
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:self.xmlData];
@@ -80,7 +83,7 @@
 	// Refresh the table data
 	[self.tableView reloadData];
 	
-	NSLog(@"%@\n %@\n %@\n", _channel, _channel.title, _channel.infoString);
+	MyLog(@"%@\n %@\n %@\n", _channel, _channel.title, _channel.infoString);
 }
 
 - (void)connection:(NSURLConnection *)connection
@@ -120,7 +123,7 @@
  qualifiedName:(NSString *)qualifiedName
 	attributes:(NSDictionary *)attributeDict
 {
-	NSLog(@"%@ found a %@ element",self,elementName);
+	ParseDebug(@"%@ found a %@ element",self,elementName);
 	
 	if ([elementName isEqualToString:@"channel"]) {
 		// Store the channel
@@ -171,7 +174,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	NSLog(@"\n\nCOUNT: %d", self.channel.items.count);
+	MyLog(@"\n\nCOUNT: %d", self.channel.items.count);
 	return self.channel.items.count;
 }
 
@@ -205,8 +208,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self.navigationController pushViewController:self.webViewController animated:YES];
-	
+	// Push the web view, unless we're in a split view
+	if (!self.splitViewController) {
+		[self.navigationController pushViewController:self.webViewController animated:YES];
+	}
 	RSSItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:item.link]];
 	
