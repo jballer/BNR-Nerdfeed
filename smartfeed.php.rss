@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="FeedCreator 1.8.0-dev (info@mypapit.net)" -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Big Nerd Ranch Books</title>
+        <description>Forum for books written by Big Nerd Ranch</description>
+        <link>http://forums.bignerdranch.com/smartfeed.php?limit=1_DAY&amp;sort_by=standard&amp;feed_type=RSS2.0&amp;feed_style=COMPACT</link>
+        <lastBuildDate>Tue, 25 Jun 2013 20:19:00 GMT</lastBuildDate>
+        <generator>FeedCreator 1.8.0-dev (info@mypapit.net)</generator>
+<atom:link href="http://forums.bignerdranch.com/smartfeed.php?limit=1_DAY&amp;sort_by=standard&amp;feed_type=RSS2.0&amp;feed_style=COMPACT" rel="self" type="application/rss+xml" />
+        <image>
+            <url>http://forums.bignerdranch.com/styles/prosilver/imageset/site_logo.gif</url>
+            <title>Big Nerd Ranch Books</title>
+            <link>http://forums.bignerdranch.com/smartfeed.php?limit=1_DAY&amp;sort_by=standard&amp;feed_type=RSS2.0&amp;feed_style=COMPACT</link>
+            <description>Forum for books written by Big Nerd Ranch</description>
+        </image>
+        <language>en-GB</language>
+        <pubDate>Tue, 25 Jun 2013 20:19:00 GMT</pubDate>
+        <ttl>60</ttl>
+        <item>
+            <title>2. Android and Model-View-Controller :: Re: TextView not clickable? :: Reply by sunnyman</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=399&amp;t=6622&amp;p=18345#p18345</link>
+            <description><![CDATA[Don't be too embarrassed. I think I did the exact same thing you did.]]></description>
+            <author>no_email@example.com (sunnyman)</author>
+            <category>2. Android and Model-View-Controller</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=399&amp;t=6622</comments>
+            <pubDate>Tue, 25 Jun 2013 01:49:39 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=399&amp;t=6622&amp;p=18345#p18345</guid>
+        </item>
+        <item>
+            <title>2. Android and Model-View-Controller :: Re: Previous Button Challenge Help Needed :: Reply by ...</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=399&amp;t=6679&amp;p=18362#p18362</link>
+            <description><![CDATA[mQuestionBank.length represents the length of the mQuestionBank array. What you're really doing by typing that is accessing a constant of mQuestionBank called length via the &quot;dot&quot; operator. All arrays in java also have this constant which is initialized when you create the array. So if I were to create a new array like this:  String[] blargle = new String[5];  This creates an array of type String called blargle, which has a length of 5 (indices 0 through 4)  Hope this clarifies that for you.]]></description>
+            <author>no_email@example.com (sparkimus)</author>
+            <category>2. Android and Model-View-Controller</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=399&amp;t=6679</comments>
+            <pubDate>Tue, 25 Jun 2013 19:48:41 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=399&amp;t=6679&amp;p=18362#p18362</guid>
+        </item>
+        <item>
+            <title>16. The Action Bar :: When I rotate, the number of option menu items increases :: Author goldsteiny</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6694&amp;p=18356#p18356</link>
+            <description><![CDATA[Hi!  I have problems with the option menu items. Everytime I rotate the device, a new set of menu items gets created and added to the existing list of menu items. This means, at the end of the chapter I start with 2 items (add crime and show subtitle), when I rotate my phone I have 4 items, when I rotate back there are 6 items and so on.  Some Google research recommended to set setRetainInstance(true) during the onCreate(), but this didn't change anything.  Thanks for your help! Yaron]]></description>
+            <author>no_email@example.com (goldsteiny)</author>
+            <category>16. The Action Bar</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=413&amp;t=6694</comments>
+            <pubDate>Tue, 25 Jun 2013 15:09:59 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6694&amp;p=18356#p18356</guid>
+        </item>
+        <item>
+            <title>16. The Action Bar :: Challenge Problem :: Author MikeMasters</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18357#p18357</link>
+            <description><![CDATA[So I have completed the challenge however the last line says &quot;Add a button to the view that will trigger the creation of a new crime so that, in this case, the user does not have to go to the options menu or action bar.&quot;  I understood that the following could be used to set android.R.id.empty to display only when android.R.id.list doesn't contain any entries (is that right?)    view&#46;setEmptyView(v&#46;findViewById(android&#46;R&#46;id&#46;empty));    The problem is that when I add a button, this doesn't disappear when I have entries because you can only set 1 view with the name android.R.id.empty. Im guessing I have to some how group these together so they disappear together but the button still has to have an id I can lookup to set the OnClickListener().  How do I do this?  Please see my code below     View v = inflater&#46;inflate(R&#46;layout&#46;fragment_list, parent, false);  		ListView view = (ListView) v&#46;findViewById(android&#46;R&#46;id&#46;list);  		view&#46;setEmptyView(v&#46;findViewById(android&#46;R&#46;id&#46;empty));  		Button mAddCrimeButton = (Button) v&#46;findViewById(R&#46;id&#46;addButton); 		mAddCrimeButton&#46;setOnClickListener(new OnClickListener() {  			@Override 			public void onClick(View arg0) { 				Crime crime = new Crime(); 				CrimeLab&#46;get(getActivity())&#46;addCrime(crime); 				Intent i = new Intent(getActivity(), CrimePagerActivity&#46;class); 				i&#46;putExtra(CrimeFragment&#46;EXTRA_CRIME_ID, crime&#46;getId()); 				startActivityForResult(i, 0);  			}  		});     and my XML looks like this     &lt;?xml version=&quot;1&#46;0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;FrameLayout xmlns&#58;android=&quot;http&#58;//schemas&#46;android&#46;com/apk/res/android&quot;     android&#58;layout_width=&quot;match_parent&quot;     android&#58;layout_height=&quot;match_parent&quot; &gt;      &lt;ListView         android&#58;id=&quot;@android&#58;id/list&quot;         android&#58;layout_width=&quot;match_parent&quot;         android&#58;layout_height=&quot;wrap_content&quot; &gt;     &lt;/ListView&gt;           &lt;TextView         android&#58;id=&quot;@+android&#58;id/empty&quot;         android&#58;layout_width=&quot;wrap_content&quot;         android&#58;layout_height=&quot;wrap_content&quot;         android&#58;paddingLeft=&quot;4dp&quot;         android&#58;paddingRight=&quot;4dp&quot;         android&#58;text=&quot;There are no crimes&quot; /&gt;          &lt;Button          android&#58;id=&quot;@+id/addButton&quot;          android&#58;layout_width=&quot;wrap_content&quot;         android&#58;layout_height=&quot;wrap_content&quot;         android&#58;paddingLeft=&quot;4dp&quot;         android&#58;paddingRight=&quot;4dp&quot;         android&#58;text=&quot;Add a crime&quot; /&gt;  &lt;/FrameLayout&gt;  ]]></description>
+            <author>no_email@example.com (MikeMasters)</author>
+            <category>16. The Action Bar</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=413&amp;t=6695</comments>
+            <pubDate>Tue, 25 Jun 2013 15:51:27 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18357#p18357</guid>
+        </item>
+        <item>
+            <title>16. The Action Bar :: Re: Challenge Problem :: Reply by MikeMasters</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18358#p18358</link>
+            <description><![CDATA[So as an experiment I changed    view&#46;setEmptyView(v&#46;findViewById(android&#46;R&#46;id&#46;empty));     to the following   view&#46;setEmptyView(v&#46;findViewById(R&#46;id&#46;addButton));    which seems to have done nothing, I would have expected my button to disappear as its the empty view but it doesn't work like that. so if the empty view is decided by android.R.id.empty what does setEmptyView even do?   Totally confused]]></description>
+            <author>no_email@example.com (MikeMasters)</author>
+            <category>16. The Action Bar</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=413&amp;t=6695</comments>
+            <pubDate>Tue, 25 Jun 2013 16:02:47 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18358#p18358</guid>
+        </item>
+        <item>
+            <title>16. The Action Bar :: Re: Challenge Problem :: Reply by phillips</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18360#p18360</link>
+            <description><![CDATA[ListFragment is very aggressive about resetting your list's empty view. So if you have something tagged with android.R.id.empty, calling setEmptyView will have no effect.]]></description>
+            <author>no_email@example.com (phillips)</author>
+            <category>16. The Action Bar</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=413&amp;t=6695</comments>
+            <pubDate>Tue, 25 Jun 2013 19:37:25 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18360#p18360</guid>
+        </item>
+        <item>
+            <title>16. The Action Bar :: Re: Challenge Problem :: Reply by MikeMasters</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18361#p18361</link>
+            <description><![CDATA[ ListFragment is very aggressive about resetting your list's empty view. So if you have something tagged with android.R.id.empty, calling setEmptyView will have no effect.    So is there a way I can group my TextView &amp; Button so that they are both only displayed when the ListView is empty or do I need to manually detect this and mess with setVisable for the button?]]></description>
+            <author>no_email@example.com (MikeMasters)</author>
+            <category>16. The Action Bar</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=413&amp;t=6695</comments>
+            <pubDate>Tue, 25 Jun 2013 19:39:52 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18361#p18361</guid>
+        </item>
+        <item>
+            <title>16. The Action Bar :: Re: Challenge Problem :: Reply by phillips</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18363#p18363</link>
+            <description><![CDATA[You can group them under a layout, and then have the layout be the empty view.]]></description>
+            <author>no_email@example.com (phillips)</author>
+            <category>16. The Action Bar</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=413&amp;t=6695</comments>
+            <pubDate>Tue, 25 Jun 2013 19:53:37 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=413&amp;t=6695&amp;p=18363#p18363</guid>
+        </item>
+        <item>
+            <title>18. Context Menus and Contextual Action Mode :: Potential Challenge Solution? Deleting from ...</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=415&amp;t=6692&amp;p=18346#p18346</link>
+            <description><![CDATA[I added a menu called &quot;challenge_fragment_crime_menu.xml&quot; as seen below. I also added an icon in &quot;drawable-hdpi&quot; called ic_delete:   &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;     &lt;item android:id=&quot;@+id/challenge_delete&quot;         android:icon=&quot;@android:drawable/ic_delete&quot;         android:title=&quot;@string/delete_crime&quot;         android:showAsAction=&quot;ifRoom|withText&quot; /&gt;  &lt;/menu&gt;   The code I changed in CrimeFragment.java:  @Override 	public boolean onOptionsItemSelected(MenuItem item) { 		switch (item.getItemId()) { 			 case R.id.challenge_delete: 				CrimeLab.get(getActivity()).deleteCrime(mCrime); 				getActivity().finish(); 				return true;  			case android.R.id.home:                                 ... @Override 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) { 		 super.onCreateOptionsMenu(menu, inflater); 		inflater.inflate(R.menu.challenge_fragment_crime_menu, menu);  	}  Is this a good way to do this?]]></description>
+            <author>no_email@example.com (estraube)</author>
+            <category>18. Context Menus and Contextual Action Mode</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=415&amp;t=6692</comments>
+            <pubDate>Tue, 25 Jun 2013 03:40:08 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=415&amp;t=6692&amp;p=18346#p18346</guid>
+        </item>
+        <item>
+            <title>18. Context Menus and Contextual Action Mode :: Re: Potential Challenge Solution? Deleting from ...</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=415&amp;t=6692&amp;p=18347#p18347</link>
+            <description><![CDATA[Yep!]]></description>
+            <author>no_email@example.com (phillips)</author>
+            <category>18. Context Menus and Contextual Action Mode</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=415&amp;t=6692</comments>
+            <pubDate>Tue, 25 Jun 2013 06:04:46 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=415&amp;t=6692&amp;p=18347#p18347</guid>
+        </item>
+        <item>
+            <title>18. Context Menus and Contextual Action Mode :: Re: ListView - highlight multiple selected ...</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=415&amp;t=6655&amp;p=18350#p18350</link>
+            <description><![CDATA[After I have implemented the code as described in listings 18.8 and 18.9 I noticed a strange thing:  - makes sure you have a multiple number of items in your list - longpress a singel item to active the action bar - select a second item  - deselect the second item  The deselected item keeps its gray background colour. I though of changing listing 18.8 to define a drawable for  state_checked  (instead of state_activated), as this is what we are looking for in the onActionItemClicked(..) method, but the behaviour does not improve.  Do you have an advice on how to get deselecting to work?]]></description>
+            <author>no_email@example.com (Brabbeldas)</author>
+            <category>18. Context Menus and Contextual Action Mode</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=415&amp;t=6655</comments>
+            <pubDate>Tue, 25 Jun 2013 11:02:27 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=415&amp;t=6655&amp;p=18350#p18350</guid>
+        </item>
+        <item>
+            <title>18. Context Menus and Contextual Action Mode :: Re: ActionMode.Callback :: Reply by Brabbeldas</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=415&amp;t=6654&amp;p=18351#p18351</link>
+            <description><![CDATA[I have tried to make a working example, maybe others find it interesting. The example uses a setOnItemLongClickListener:                 if (Build&#46;VERSION&#46;SDK_INT &lt; Build&#46;VERSION_CODES&#46;HONEYCOMB){ 			// Use FloatingContextMenus on old devices // 			registerForContextMenu(listView); 		} else{ 			// Use Contextual ActionBar on new devices // 			 			// ListView in Single-Selection-Mode (is default?) // 			// Enable Long-Click // 			listView&#46;setLongClickable(true); 			listView&#46;setOnItemLongClickListener(new AdapterView&#46;OnItemLongClickListener() { 			 				 				@Override 				public boolean onItemLongClick(AdapterView&lt;?&gt; av, View v, int pos, long id) { 					 					getActivity()&#46;startActionMode(new ActionMode&#46;Callback() { 						 						@Override 						public boolean onCreateActionMode(ActionMode mode, Menu menu) { 							MenuInflater inflater = mode&#46;getMenuInflater(); 							inflater&#46;inflate(R&#46;menu&#46;crime_list_item_context, menu); 							return true; 						} 						 						@Override 						public boolean onPrepareActionMode(ActionMode mode, Menu menu) { 							// Required but not used in this implementation 							return false; 						} 						 						@Override 						public boolean onActionItemClicked(ActionMode mode, MenuItem item) { 							// Menu might have multiple items 							switch (item&#46;getItemId()) { 							case R&#46;id&#46;menu_item_delete_crime&#58; 								 								// Get both the ListView's adapter and the CrimeLab 								CrimeAdapter adapter = (CrimeAdapter)getListAdapter(); 								CrimeLab crimeLab = CrimeLab&#46;get(getActivity()); 								 								// Walk through all items in ListView // 								for (int i = adapter&#46;getCount() - 1; i &gt;= 0; i--){ 									// Determine if the item is 'Checked' // 									if (getListView()&#46;isItemChecked(i)){ 										// If so&#58; delete it from the CrimeLab // 										crimeLab&#46;deleteCrime(adapter&#46;getItem(i)); 									} 								} 								 								// Prepare ActionMode to be destroyed // 								mode&#46;finish(); 								// Notify adapter to reload list // 								adapter&#46;notifyDataSetChanged(); 								 								 								return true;  							default&#58; 								return false; 							} 							 						} 						 						@Override 						public void onDestroyActionMode(ActionMode mode) { 							// Required but not used in this implementation 							 						} 						 					}); 					 					return true; 				} 			});         } ]]></description>
+            <author>no_email@example.com (Brabbeldas)</author>
+            <category>18. Context Menus and Contextual Action Mode</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=415&amp;t=6654</comments>
+            <pubDate>Tue, 25 Jun 2013 11:33:50 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=415&amp;t=6654&amp;p=18351#p18351</guid>
+        </item>
+        <item>
+            <title>20. Taking Pictures and Handling Images :: Re: Challenge: Crime Image Orientation :: Reply by ...</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=417&amp;t=6569&amp;p=18354#p18354</link>
+            <description><![CDATA[Chapter 20 offers a pretty hard challange. Any solutions so far?]]></description>
+            <author>no_email@example.com (JensJensen)</author>
+            <category>20. Taking Pictures and Handling Images</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=417&amp;t=6569</comments>
+            <pubDate>Tue, 25 Jun 2013 13:15:43 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=417&amp;t=6569&amp;p=18354#p18354</guid>
+        </item>
+        <item>
+            <title>16. Localization :: Re: For the More Curious: ibtool :: Reply by wagill</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=188&amp;t=3264&amp;p=18336#p18336</link>
+            <description><![CDATA[My thanks to the authors for including information about  ibtool  in this chapter of the book.  It was a real life saver in my real-life localization project.]]></description>
+            <author>no_email@example.com (wagill)</author>
+            <category>16. Localization</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=188&amp;t=3264</comments>
+            <pubDate>Mon, 24 Jun 2013 20:27:12 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=188&amp;t=3264&amp;p=18336#p18336</guid>
+        </item>
+        <item>
+            <title>7. View Controllers :: Re: Error when trying to create instance of HypnosisView :: Reply by dkindler</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=219&amp;t=6688&amp;p=18338#p18338</link>
+            <description><![CDATA[Edit:  Found out what I did wrong. When I imported the HypnosisView h/m files I forgot to select &quot;Add to targets: HypnoTime&quot;.]]></description>
+            <author>no_email@example.com (dkindler)</author>
+            <category>7. View Controllers</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=219&amp;t=6688</comments>
+            <pubDate>Mon, 24 Jun 2013 21:17:16 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=219&amp;t=6688&amp;p=18338#p18338</guid>
+        </item>
+        <item>
+            <title>7. View Controllers :: Re: Silver Challenge Solution :: Reply by DanLoranz</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=219&amp;t=6516&amp;p=18359#p18359</link>
+            <description><![CDATA[  Make a XIB, set File's Owner to HypnosisViewController, add a UIView to the XIB (change class to HypnosisView in Identity), add a SegmentedControl. Get rid of loadView. Override awakeFromNib in HypnosisView and do the init setup there.   jgelling - can you please give more details.  I'm stuck on this part.  I did take loadView out, and set the XIB File's Owner to HypnosisViewController.  I also connected the view outlet.  But Setting the UIView class to HypnosisView in the Identity inspector leaves me with a runtime crash  ... NSInvalidArgumentException reason: 'NSConcreteMutableAttributedString initWithString:: nil value   ... in the drawRect: method of my HypnosisView.  Does the HypnosisView initWithFrame: go away altogether and get replaced with awakeFromNib?    Thanks.]]></description>
+            <author>no_email@example.com (DanLoranz)</author>
+            <category>7. View Controllers</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=219&amp;t=6516</comments>
+            <pubDate>Tue, 25 Jun 2013 18:42:42 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=219&amp;t=6516&amp;p=18359#p18359</guid>
+        </item>
+        <item>
+            <title>16. Core Data :: Re: Bronze challenge : dismiss popover ? :: Reply by physics90</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=228&amp;t=4648&amp;p=18343#p18343</link>
+            <description><![CDATA[I too am puzzled by the level of dificulty with this Bronze Challenge. This has actually happened to me several times with the BSG where Bronze turned out to be the hardest. Anyway, I don't think we should have to use NSNotification. That seems too artificial. Not saying it isn't. It just doesn't feel right.  I was trying to go along the lines of the other solutions. I wanted to just import the header file for DetailViewController which held and instance variable, publicly available, for the assetPopover. I thought by doing so I could then simply call dismissPopover:Animated:. But, my assetPicker implementation would never see the instance variable. Any one have  a reason why this might be?]]></description>
+            <author>no_email@example.com (physics90)</author>
+            <category>16. Core Data</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=228&amp;t=4648</comments>
+            <pubDate>Tue, 25 Jun 2013 01:01:29 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=228&amp;t=4648&amp;p=18343#p18343</guid>
+        </item>
+        <item>
+            <title>16. Core Data :: Re: Bronze challenge : dismiss popover ? :: Reply by physics90</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=228&amp;t=4648&amp;p=18344#p18344</link>
+            <description><![CDATA[Better solution.  I added a property for a popover in the AssetPicker h &amp; m. Then set it's property from detailViewController. Then I was able to call dismissPopover:animated:  The only issue I'm having now is automatically updating the text of the assetPicker button. Even though I imported DetailViewController into AssetPicker I still can't access the instance variables or properties.]]></description>
+            <author>no_email@example.com (physics90)</author>
+            <category>16. Core Data</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=228&amp;t=4648</comments>
+            <pubDate>Tue, 25 Jun 2013 01:40:38 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=228&amp;t=4648&amp;p=18344#p18344</guid>
+        </item>
+        <item>
+            <title>16. Core Data :: Re: Bronze challenge : dismiss popover ? :: Reply by Valerie</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=228&amp;t=4648&amp;p=18348#p18348</link>
+            <description><![CDATA[Might be I totally didn't get the point but I tried the following solution staying in line with the previous chapter using a selector. detailviewcontroller:  - (IBAction)showAssetTypePicker&#58;(id)sender { //    &#91;&#91;self view&#93; endEditing&#58;YES&#93;;          AssetTypePicker *assetTypePicker = &#91;&#91;AssetTypePicker alloc&#93; init&#93;;     &#91;assetTypePicker setItem&#58;item&#93;;      /*  for Bronze purpose comment this part     &#91;&#91;self navigationController&#93; pushViewController&#58;assetTypePicker                                            animated&#58;YES&#93;;      setup popover instead of navigationcontroller doing this  */     NSString *selector = NSStringFromSelector(_cmd);     selector = &#91;selector stringByAppendingString&#58;@&quot;withAssetTypePicker&#58;&quot;&#93;;     SEL newSelector = NSSelectorFromString(selector);              if(&#91;controller respondsToSelector&#58;newSelector&#93;) {             NSLog(@&quot;select method exists&quot;);             &#91;controller performSelector&#58;newSelector withObject&#58;sender                              withObject&#58;assetTypePicker&#93;;         }         else{             NSLog(@&quot;select method does not exist with controller %@ and selector&#58; %@&quot;, &#91;controller description&#93;,&#91;selector description&#93;);          } }    So this invoked the itemsviewcontroller where I added the following method:  // New - (void)showAssetTypePicker&#58;(id)sender withAssetTypePicker&#58; (AssetTypePicker *) picker {     NSLog(@&quot;Going to show the AssetTypePicker %@&quot;, &#91;picker description&#93;);          CGRect rect = &#91;&#91;self view&#93; convertRect&#58;&#91;sender bounds&#93; fromView&#58;sender&#93;;          // Present a 600x600 popover     assetTypePicker = &#91;&#91;UIPopoverController alloc&#93; initWithContentViewController&#58;picker&#93;;     &#91;assetTypePicker setDelegate&#58;self&#93;;     &#91;assetTypePicker setPopoverContentSize&#58;CGSizeMake(600, 600)&#93;;     &#91;assetTypePicker presentPopoverFromRect&#58;rect                                   inView&#58;&#91;self view&#93;                 permittedArrowDirections&#58;UIPopoverArrowDirectionAny                                 animated&#58;YES&#93;;           }    for dismissing the popover I used this and simply added the other popover:  - (void)popoverControllerDidDismissPopover&#58;(UIPopoverController *)popoverController {     &#91;imagePopover dismissPopoverAnimated&#58;YES&#93;;     imagePopover = nil;     &#91;assetTypePicker dismissPopoverAnimated&#58;YES&#93;;     assetTypePicker = nil; }    It did work when creating the object, but at a second time the following error appeared:  Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[UIPopoverController presentPopoverFromRect:inView:permittedArrowDirections:animated:]: Popovers cannot be presented from a view which does not have a window.'   I have no clue why this happens as it shows the assetTypePicker which is a subclass of UITableViewController and should contain a view.  Any help would be highly appreciated!  EDIT: it seems in none of the solutions I've seen someone uses the itemsviewcontroller so will try detailviewcontroller. I'm very curious thous what this error occured especially as it seems to work the first time.]]></description>
+            <author>no_email@example.com (Valerie)</author>
+            <category>16. Core Data</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=228&amp;t=4648</comments>
+            <pubDate>Tue, 25 Jun 2013 09:53:05 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=228&amp;t=4648&amp;p=18348#p18348</guid>
+        </item>
+        <item>
+            <title>16. Core Data :: When to use &quot;use scalar properties for primitive data types&quot; :: ...</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=228&amp;t=6693&amp;p=18355#p18355</link>
+            <description><![CDATA[I'm wondering if anyone can give a plain English explanation for when (or why) I should or shouldn't select the &quot;use scalar properties for primitive data types&quot; when creating the NSManagedObject subclasses out of Core Data?  I've tried to get an explanation that gives clear direction out of the book, the forums here, and googling aorund but I don't feel that I have a firm grasp on  why  I should be selecting this option, and the benefit to the application.  Any explanation would be very much appreciated as this has been gnawing at me for quite a while!]]></description>
+            <author>no_email@example.com (kirenosliw)</author>
+            <category>16. Core Data</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=228&amp;t=6693</comments>
+            <pubDate>Tue, 25 Jun 2013 13:19:56 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=228&amp;t=6693&amp;p=18355#p18355</guid>
+        </item>
+        <item>
+            <title>29. Advanced MVCS :: Bug fix for Nerdfeed :: Author stormville</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=241&amp;t=6690&amp;p=18337#p18337</link>
+            <description><![CDATA[addItemsFromChannel: does not work if the cache is empty, because you are sending the addObject: message to nil.   My solution was to test for that condition and set 'items'   RSSChannel.h    @property (nonatomic, strong) NSMutableArray *items;    RSSChannel.m   - (void)addItemsFromChannel&#58;(RSSChannel *)otherChannel {            for (RSSItem *i in &#91;otherChannel items&#93;) {                        // Cater for cache being empty         if (!&#91;self items&#93;) {                         NSMutableArray *myItems = &#91;NSMutableArray arrayWithObject&#58;i&#93;;             &#91;self setItems&#58;myItems&#93;;         }         // If self's items does not contain this item, we add this item            if (!&#91;&#91;self items&#93; containsObject&#58;i&#93;) {                         &#91;&#91;self items&#93; addObject&#58;i&#93;;         }                 // Sort the array of items by publication date                 &#91;&#91;self items&#93; sortUsingComparator&#58;^NSComparisonResult(id obj1, id obj2) {             return &#91;&#91;obj2 publicationDate&#93; compare&#58;&#91;obj1 publicationDate&#93;&#93;;         }&#93;;             }     }  ]]></description>
+            <author>no_email@example.com (stormville)</author>
+            <category>29. Advanced MVCS</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=241&amp;t=6690</comments>
+            <pubDate>Mon, 24 Jun 2013 21:00:51 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=241&amp;t=6690&amp;p=18337#p18337</guid>
+        </item>
+        <item>
+            <title>5. Functions :: Re: Implicit declaration of function 'sleep' :: Reply by dhammarun</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=137&amp;t=5866&amp;p=18342#p18342</link>
+            <description><![CDATA[Thanks, I got it.]]></description>
+            <author>no_email@example.com (dhammarun)</author>
+            <category>5. Functions</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=137&amp;t=5866</comments>
+            <pubDate>Tue, 25 Jun 2013 00:28:57 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=137&amp;t=5866&amp;p=18342#p18342</guid>
+        </item>
+        <item>
+            <title>19. Object Instance Variables :: Re: Challenge 19 Complete :: Reply by mhauken</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=151&amp;t=6684&amp;p=18349#p18349</link>
+            <description><![CDATA[Thanks for the walkthrough and great comments. However I can see that you've missed adding portfolio.m, and I'm stuck on how defining addAsset in that file. ;P]]></description>
+            <author>no_email@example.com (mhauken)</author>
+            <category>19. Object Instance Variables</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=151&amp;t=6684</comments>
+            <pubDate>Tue, 25 Jun 2013 10:14:24 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=151&amp;t=6684&amp;p=18349#p18349</guid>
+        </item>
+        <item>
+            <title>19. Object Instance Variables :: Re: Challenge 19 Complete :: Reply by mhauken</title>
+            <link>http://forums.bignerdranch.com/viewtopic.php?f=151&amp;t=6684&amp;p=18352#p18352</link>
+            <description><![CDATA[Here is my solution to Portfolio.m:   #import &quot;Portfolio&#46;h&quot;  @implementation Portfolio      @synthesize currentValue;   - (void) addAsset&#58; (StockHolding *) a {     //is asset nil?     if (!assets){         assets = &#91;&#91;NSMutableArray alloc&#93; init&#93;;     }     &#91;assets addObject&#58;a&#93;; }  @end    Do you have something similar?]]></description>
+            <author>no_email@example.com (mhauken)</author>
+            <category>19. Object Instance Variables</category>
+            <comments>http://forums.bignerdranch.com/posting.php?mode=reply&amp;f=151&amp;t=6684</comments>
+            <pubDate>Tue, 25 Jun 2013 13:06:01 GMT</pubDate>
+            <guid isPermaLink="false">http://forums.bignerdranch.com/viewtopic.php?f=151&amp;t=6684&amp;p=18352#p18352</guid>
+        </item>
+    </channel>
+</rss>
