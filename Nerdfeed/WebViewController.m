@@ -106,6 +106,7 @@
 		RSSItem *item = object;
 		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:item.link]];
 		[self.webView loadRequest:request];
+		
 		self.navigationItem.title = item.title;
 		if (popover) {
 			[popover dismissPopoverAnimated:YES];
@@ -137,7 +138,7 @@
 		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
 	   forPopoverController:(UIPopoverController *)pc
 {
-	barButtonItem.title = @"Discussion List";
+	barButtonItem.title = @"RSS";
 	[self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
 	popover = pc;
 }

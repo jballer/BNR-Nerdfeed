@@ -10,6 +10,7 @@
 #import "RSSChannel.h"
 #import "RSSItem.h"
 #import "WebViewController.h"
+#import "ChannelViewController.h"
 
 //TODO: Bronze Challenge - UITableViewCell with 3 labels
 
@@ -20,6 +21,12 @@
     self = [super initWithStyle:style];
     if (self) {
 		self.navigationItem.title = @"RSS";
+		
+		UIBarButtonItem *channelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Channel"
+																			  style:UIBarButtonItemStyleBordered
+																			 target:self
+																			 action:@selector(showChannelInfo:)];
+		self.navigationItem.rightBarButtonItem = channelButtonItem;
 		
 		// Kick off the asynchronous data fetch
         [self fetchEntries];
@@ -46,6 +53,52 @@
 	// Create a connection with the request
 	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	// (BNR says to use alloc initWithRequest:delegate:startImmediately:)
+}
+
+- (void)showChannelInfo:(id)sender
+{
+	ChannelViewController *cvc = [ChannelViewController new];
+	[cvc listViewController:self handleObject:self.channel];
+	
+	[self showDetailViewController:cvc];
+	[self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+}
+
+- (void)showDetailViewController:(UIViewController<UISplitViewControllerDelegate> *)vc
+{
+	// Push the detail view, unless we're in a split view
+	if (self.splitViewController)
+	{
+		// If this is a split view, embed in a Navigation Controller
+		
+		NSMutableArray *vcs = [self.splitViewController.viewControllers mutableCopy];
+		UIViewController *currentDetail = vcs[1];
+		
+		// Make sure it's not already there in a nav controller
+		if ([currentDetail isKindOfClass:[UINavigationController class]])
+		{
+			UINavigationController *currentNav = (UINavigationController *)currentDetail;
+			if([currentNav.viewControllers containsObject:vc]) {
+				return;
+			}
+			else {
+				currentNav.viewControllers = @[vc];
+			}
+		}
+		else // no navigation controller
+		{
+			UINavigationController *vcnav = [[UINavigationController alloc] initWithRootViewController:vc];
+			vcs[1] = vcnav;
+			self.splitViewController.viewControllers = vcs;
+		}
+		
+		self.splitViewController.delegate = vc;
+	}
+	else
+	{
+		[self.navigationController pushViewController:vc animated:YES];
+	}
+
 }
 
 #pragma mark <NSURLConnectionDataDelegate>
@@ -208,10 +261,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	// Push the web view, unless we're in a split view
-	if (!self.splitViewController) {
-		[self.navigationController pushViewController:self.webViewController animated:YES];
-	}
+	[self showDetailViewController:self.webViewController];
+	
 	RSSItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
 	[self.webViewController listViewController:self handleObject:item];
