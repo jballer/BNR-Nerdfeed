@@ -45,6 +45,10 @@
 	_webView.translatesAutoresizingMaskIntoConstraints = NO;
 	[contentView addSubview:_webView];
 	
+	// Test the left bar buttons on the nav bar
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:nil action:nil];
+	
+	
 	// Set up the back/forward buttons
 	backButton = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(goBack:)];
 	forwardButton = [[UIBarButtonItem alloc] initWithTitle:@">" style:UIBarButtonItemStyleDone target:self action:@selector(goForward:)];
@@ -105,27 +109,6 @@
 	backButton.enabled = self.webView.canGoBack;
 	
 	forwardButton.enabled = self.webView.canGoForward;
-}
-
-#pragma mark - Accessors
-
-#pragma mark Replaceable Detail View Controller
-
-- (void)setPersistentBarButtonItem:(UIBarButtonItem *)persistentBarButtonItem
-{
-	NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
-	
-	if (persistentBarButtonItem) {
-		[buttonItems count] ?
-			[buttonItems insertObject:persistentBarButtonItem atIndex:0] : [buttonItems addObject:persistentBarButtonItem];
-	}
-	else {
-		[buttonItems removeObject:_persistentBarButtonItem];
-	}
-	
-	self.navigationItem.leftBarButtonItems = buttonItems;
-	
-	_persistentBarButtonItem = persistentBarButtonItem;
 }
 
 #pragma mark - List View Delegate

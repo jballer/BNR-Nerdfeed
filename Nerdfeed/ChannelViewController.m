@@ -61,25 +61,6 @@ static NSString *kChannelCellIdentifier = @"ChannelInfoCell";
 	_cellContents = [NSDictionary dictionaryWithDictionary:temp];
 }
 
-#pragma mark Replaceable Detail View Controller
-
-- (void)setPersistentBarButtonItem:(UIBarButtonItem *)persistentBarButtonItem
-{
-	NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
-	
-	if (persistentBarButtonItem) {
-		[buttonItems count] ?
-		[buttonItems insertObject:persistentBarButtonItem atIndex:0] : [buttonItems addObject:persistentBarButtonItem];
-	}
-	else {
-		[buttonItems removeObject:_persistentBarButtonItem];
-	}
-	
-	self.navigationItem.leftBarButtonItems = buttonItems;
-	
-	_persistentBarButtonItem = persistentBarButtonItem;
-}
-
 #pragma mark - List View Controller Delegate
 
 - (void)listViewController:(ListViewController *)lvc handleObject:(id)object

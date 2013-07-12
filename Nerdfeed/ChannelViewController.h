@@ -12,8 +12,7 @@
 
 @class RSSChannel;
 
-@interface ChannelViewController : UITableViewController <UISplitViewControllerDelegate, ListViewControllerDelegate, ReplaceableDetailViewController>
+@interface ChannelViewController : UITableViewController <UISplitViewControllerDelegate, ListViewControllerDelegate>
 
-@property (nonatomic, strong) UIBarButtonItem *persistentBarButtonItem;
 
 @end

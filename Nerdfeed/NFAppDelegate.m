@@ -34,9 +34,7 @@
 	lvc.webViewController = wvc;
 	
 	// Embed the list in a nav controller
-	UINavigationController *listNav = [[UINavigationController alloc] initWithRootViewController:lvc];
-	lvc.navigationItem.title = @"NAV";
-	lvc.navigationItem.backBarButtonItem.title = @"Nav Back";
+	UINavigationController *listNav = [[UINavigationController alloc] initWithRootViewController:lvc];		
 	
 	// Use a split view if we're on an iPad
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {

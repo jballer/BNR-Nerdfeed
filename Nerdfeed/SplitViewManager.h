@@ -9,16 +9,10 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol ReplaceableDetailViewController
-
-@property (nonatomic, retain) UIBarButtonItem *persistentBarButtonItem;
-
-@end
-
-
 @interface SplitViewManager : NSObject <UISplitViewControllerDelegate>
 
 @property (nonatomic, retain) UISplitViewController *splitViewController;
-@property (nonatomic, weak) UIViewController<ReplaceableDetailViewController> *detailViewController;
+@property (nonatomic, weak) UIViewController *detailViewController;
+@property (nonatomic, strong) UIBarButtonItem *persistentBarButtonItem;
 
 @end

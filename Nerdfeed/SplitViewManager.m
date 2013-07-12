@@ -7,17 +7,15 @@
 //
 
 #import "SplitViewManager.h"
+#import "UIViewController+ReplaceableDetailViewController.h"
 
 @interface SplitViewManager ()
-
-@property (nonatomic, strong) UIBarButtonItem *persistentBarButtonItem;
 @property (nonatomic, strong) UIPopoverController *popover;
-
 @end
 
 @implementation SplitViewManager
 
-- (void)setDetailViewController:(UIViewController<ReplaceableDetailViewController> *)detailViewController
+- (void)setDetailViewController:(UIViewController *)detailViewController
 {
 	// Move the "show master" button to the new view
 	_detailViewController.persistentBarButtonItem = nil;
@@ -41,9 +39,10 @@
 - (void)setPersistentBarButtonItem:(UIBarButtonItem *)persistentBarButtonItem
 {
 	if (_persistentBarButtonItem != persistentBarButtonItem) {
-		_persistentBarButtonItem = persistentBarButtonItem;
 		_detailViewController.persistentBarButtonItem = persistentBarButtonItem;
 		// could cause deadlock if not first checked for equality!
+		
+		_persistentBarButtonItem = persistentBarButtonItem;
 	}
 }
 
@@ -54,7 +53,7 @@
 		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
 	   forPopoverController:(UIPopoverController *)pc
 {
-	barButtonItem.title = @"< BNR Discussions";
+	barButtonItem.title = @"BNR Discussions";
 	self.persistentBarButtonItem = barButtonItem;
 	
 	self.popover = pc;
