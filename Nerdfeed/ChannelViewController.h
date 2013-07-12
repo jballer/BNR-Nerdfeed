@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ListViewController.h"
+#import "SplitViewManager.h"
 
 @class RSSChannel;
 
-@interface ChannelViewController : UITableViewController <ListViewControllerDelegate, UISplitViewControllerDelegate>
+@interface ChannelViewController : UITableViewController <UISplitViewControllerDelegate, ListViewControllerDelegate, ReplaceableDetailViewController>
+
+@property (nonatomic, strong) UIBarButtonItem *persistentBarButtonItem;
 
 @end

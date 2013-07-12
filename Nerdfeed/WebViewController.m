@@ -20,6 +20,15 @@
 
 @implementation WebViewController
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	if (self) {
+		self.navigationItem.leftItemsSupplementBackButton = YES;
+	}
+	return self;
+}
+
 - (void)loadView
 {
 	// Content View -> WebView + Toolbar
@@ -98,6 +107,27 @@
 	forwardButton.enabled = self.webView.canGoForward;
 }
 
+#pragma mark - Accessors
+
+#pragma mark Replaceable Detail View Controller
+
+- (void)setPersistentBarButtonItem:(UIBarButtonItem *)persistentBarButtonItem
+{
+	NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
+	
+	if (persistentBarButtonItem) {
+		[buttonItems count] ?
+			[buttonItems insertObject:persistentBarButtonItem atIndex:0] : [buttonItems addObject:persistentBarButtonItem];
+	}
+	else {
+		[buttonItems removeObject:_persistentBarButtonItem];
+	}
+	
+	self.navigationItem.leftBarButtonItems = buttonItems;
+	
+	_persistentBarButtonItem = persistentBarButtonItem;
+}
+
 #pragma mark - List View Delegate
 
 - (void)listViewController:(ListViewController *)lvc handleObject:(id)object
@@ -138,7 +168,6 @@
 		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
 	   forPopoverController:(UIPopoverController *)pc
 {
-	barButtonItem.title = @"RSS";
 	[self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
 	popover = pc;
 }

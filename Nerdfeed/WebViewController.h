@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "ListViewController.h"
+#import "SplitViewManager.h"
 
-@interface WebViewController : UIViewController <UIWebViewDelegate, UISplitViewControllerDelegate, ListViewControllerDelegate>
+@interface WebViewController : UIViewController <UIWebViewDelegate, UISplitViewControllerDelegate, ListViewControllerDelegate, ReplaceableDetailViewController>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIToolbar *toolbar;
+
+@property (nonatomic, strong) UIBarButtonItem *persistentBarButtonItem;
 
 @end

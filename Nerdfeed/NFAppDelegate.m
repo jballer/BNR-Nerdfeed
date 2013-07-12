@@ -16,6 +16,8 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+@property (nonatomic, retain) SplitViewManager *splitViewManager;
+
 @end
 
 @implementation NFAppDelegate
@@ -33,16 +35,23 @@
 	
 	// Embed the list in a nav controller
 	UINavigationController *listNav = [[UINavigationController alloc] initWithRootViewController:lvc];
+	lvc.navigationItem.title = @"NAV";
+	lvc.navigationItem.backBarButtonItem.title = @"Nav Back";
 	
 	// Use a split view if we're on an iPad
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 		
 		// Embed the detail webview in a nav controller
-		UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:wvc];
+//		UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:wvc];
 		
 		UISplitViewController *splitvc = [UISplitViewController new];
-		splitvc.viewControllers = @[listNav, detailNav];
-		splitvc.delegate = wvc;
+		splitvc.viewControllers = @[listNav, wvc];
+
+		// Set up the custom split view delegate
+		self.splitViewManager = [SplitViewManager new];
+		self.splitViewManager.splitViewController = splitvc;
+		self.splitViewManager.detailViewController = wvc;
+		splitvc.delegate = self.splitViewManager;
 		
 		self.window.rootViewController = splitvc;
 	}

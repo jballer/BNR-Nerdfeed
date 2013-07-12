@@ -31,30 +31,16 @@ static NSString *kChannelCellIdentifier = @"ChannelInfoCell";
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        _cellContents = [NSDictionary new];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	
-	[self.tableView registerClass:[RSSChannelCell class]
-		   forCellReuseIdentifier:kChannelCellIdentifier];
-	
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark Accessors
 
+/**
+ This is where the logic resides for determining what cells we display and in what order.
+ */
 - (void)setChannel:(RSSChannel *)channel
 {
 	self.cellContents = @{@"Title":channel.title,
@@ -64,16 +50,34 @@ static NSString *kChannelCellIdentifier = @"ChannelInfoCell";
 
 - (void)setCellContents:(NSDictionary *)cellContents
 {
-	NSArray *keys = @[@"Title",@"Info"];
-	NSArray *contents = [cellContents objectsForKeys:keys notFoundMarker:@""];
-
-	for (id obj in contents) {
-		if (![obj isKindOfClass:[NSString class]]) {
-			return;
+	NSMutableDictionary *temp = [NSMutableDictionary dictionaryWithDictionary:_cellContents];
+	for (id key in cellContents) {
+		id obj = [cellContents objectForKey:key];
+		if ([obj isKindOfClass:[NSString class]]) { // Sanitize… we only want strings here
+			[temp setObject:obj forKey:key];
 		}
 	}
-	_cellContents = [[NSDictionary alloc] initWithObjects:contents
-												  forKeys:keys];
+	
+	_cellContents = [NSDictionary dictionaryWithDictionary:temp];
+}
+
+#pragma mark Replaceable Detail View Controller
+
+- (void)setPersistentBarButtonItem:(UIBarButtonItem *)persistentBarButtonItem
+{
+	NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
+	
+	if (persistentBarButtonItem) {
+		[buttonItems count] ?
+		[buttonItems insertObject:persistentBarButtonItem atIndex:0] : [buttonItems addObject:persistentBarButtonItem];
+	}
+	else {
+		[buttonItems removeObject:_persistentBarButtonItem];
+	}
+	
+	self.navigationItem.leftBarButtonItems = buttonItems;
+	
+	_persistentBarButtonItem = persistentBarButtonItem;
 }
 
 #pragma mark - List View Controller Delegate
@@ -95,7 +99,6 @@ static NSString *kChannelCellIdentifier = @"ChannelInfoCell";
 		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
 	   forPopoverController:(UIPopoverController *)pc
 {
-	barButtonItem.title = @"RSS";
 	[self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
 	popover = pc;
 }
@@ -128,7 +131,7 @@ static NSString *kChannelCellIdentifier = @"ChannelInfoCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kChannelCellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kChannelCellIdentifier];
 	
 	if (!cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2

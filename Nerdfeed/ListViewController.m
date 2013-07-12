@@ -20,9 +20,9 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-		self.navigationItem.title = @"RSS";
+		self.navigationItem.backBarButtonItem.title = @"List Back";
 		
-		UIBarButtonItem *channelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Channel"
+		UIBarButtonItem *channelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Info"
 																			  style:UIBarButtonItemStyleBordered
 																			 target:self
 																			 action:@selector(showChannelInfo:)];
@@ -57,48 +57,23 @@
 
 - (void)showChannelInfo:(id)sender
 {
-	ChannelViewController *cvc = [ChannelViewController new];
-	[cvc listViewController:self handleObject:self.channel];
+	ChannelViewController *cvc = [[ChannelViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	
-	[self showDetailViewController:cvc];
-	[self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-}
-
-- (void)showDetailViewController:(UIViewController<UISplitViewControllerDelegate> *)vc
-{
-	// Push the detail view, unless we're in a split view
-	if (self.splitViewController)
-	{
-		// If this is a split view, embed in a Navigation Controller
-		
-		NSMutableArray *vcs = [self.splitViewController.viewControllers mutableCopy];
-		UIViewController *currentDetail = vcs[1];
-		
-		// Make sure it's not already there in a nav controller
-		if ([currentDetail isKindOfClass:[UINavigationController class]])
-		{
-			UINavigationController *currentNav = (UINavigationController *)currentDetail;
-			if([currentNav.viewControllers containsObject:vc]) {
-				return;
-			}
-			else {
-				currentNav.viewControllers = @[vc];
-			}
-		}
-		else // no navigation controller
-		{
-			UINavigationController *vcnav = [[UINavigationController alloc] initWithRootViewController:vc];
-			vcs[1] = vcnav;
-			self.splitViewController.viewControllers = vcs;
+	if (self.splitViewController) {
+		// Clear any selection since the detail is getting replaced
+		if (self.tableView.indexPathForSelectedRow) {
+			[self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
 		}
 		
-		self.splitViewController.delegate = vc;
+		// Replace the WebView with this thing
+		SplitViewManager *manager = (SplitViewManager *)self.splitViewController.delegate;
+		[manager setDetailViewController:cvc];
 	}
-	else
-	{
-		[self.navigationController pushViewController:vc animated:YES];
+	else {
+		[self.navigationController pushViewController:cvc animated:YES];
 	}
-
+	
+	[cvc listViewController:self handleObject:self.channel];
 }
 
 #pragma mark <NSURLConnectionDataDelegate>
@@ -261,10 +236,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self showDetailViewController:self.webViewController];
-	
 	RSSItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
+	if (self.splitViewController) {
+		SplitViewManager *manager = (SplitViewManager *)self.splitViewController.delegate;
+		[manager setDetailViewController:self.webViewController];
+	}
+	else {
+		[self.navigationController pushViewController:self.webViewController animated:YES];
+	}
+	
 	[self.webViewController listViewController:self handleObject:item];
 }
 
