@@ -12,7 +12,6 @@
 
 @class RSSChannel;
 
-@interface ChannelViewController : UITableViewController <UISplitViewControllerDelegate, ListViewControllerDelegate>
-
+@interface ChannelViewController : UITableViewController <UISplitViewControllerDelegate, ListViewControllerDelegate, ReplaceableDetailViewController>
 
 @end

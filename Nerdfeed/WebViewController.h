@@ -10,7 +10,7 @@
 #import "ListViewController.h"
 #import "SplitViewManager.h"
 
-@interface WebViewController : UIViewController <UIWebViewDelegate, UISplitViewControllerDelegate, ListViewControllerDelegate>
+@interface WebViewController : UIViewController <UIWebViewDelegate, ListViewControllerDelegate, ReplaceableDetailViewController>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIToolbar *toolbar;

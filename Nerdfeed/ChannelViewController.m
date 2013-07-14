@@ -10,9 +10,6 @@
 #import "RSSChannel.h"
 
 @interface ChannelViewController ()
-{
-	__weak UIPopoverController *popover;
-}
 
 @property (nonatomic, retain) RSSChannel *channel;
 @property (nonatomic, retain) NSDictionary *cellContents;
@@ -67,28 +64,7 @@ static NSString *kChannelCellIdentifier = @"ChannelInfoCell";
 {
 	if ([object isKindOfClass:[RSSChannel class]]) {
 		self.channel = object;
-		if (popover) {
-			[popover dismissPopoverAnimated:YES];
-		}
 	}
-}
-
-#pragma mark - Split View Delegate
-
-- (void)splitViewController:(UISplitViewController *)svc
-	 willHideViewController:(UIViewController *)aViewController
-		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
-	   forPopoverController:(UIPopoverController *)pc
-{
-	[self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-	popover = pc;
-}
-
-- (void)splitViewController:(UISplitViewController *)svc
-	 willShowViewController:(UIViewController *)aViewController
-  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
 }
 
 #pragma mark - Table View Delegate

@@ -40,16 +40,12 @@
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 		
 		// Embed the detail webview in a nav controller
-//		UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:wvc];
-		
 		UISplitViewController *splitvc = [UISplitViewController new];
-		splitvc.viewControllers = @[listNav, wvc];
-
+		splitvc.viewControllers = @[listNav,[[UINavigationController alloc] initWithRootViewController:wvc]];
+		
 		// Set up the custom split view delegate
 		self.splitViewManager = [SplitViewManager new];
 		self.splitViewManager.splitViewController = splitvc;
-		self.splitViewManager.detailViewController = wvc;
-		splitvc.delegate = self.splitViewManager;
 		
 		self.window.rootViewController = splitvc;
 	}

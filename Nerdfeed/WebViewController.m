@@ -13,20 +13,19 @@
 {
 	UIBarButtonItem *backButton;
 	UIBarButtonItem *forwardButton;
-	
-	__weak UIPopoverController *popover;
 }
 @end
 
 @implementation WebViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
-		self.navigationItem.leftItemsSupplementBackButton = YES;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        // Test the left bar buttons on the nav bar
+		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:nil action:nil];
+    }
+    return self;
 }
 
 - (void)loadView
@@ -44,10 +43,6 @@
 //	_webView.backgroundColor = [UIColor yellowColor];
 	_webView.translatesAutoresizingMaskIntoConstraints = NO;
 	[contentView addSubview:_webView];
-	
-	// Test the left bar buttons on the nav bar
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:nil action:nil];
-	
 	
 	// Set up the back/forward buttons
 	backButton = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(goBack:)];
@@ -111,6 +106,8 @@
 	forwardButton.enabled = self.webView.canGoForward;
 }
 
+#pragma mark Reusable Detail View Controller
+
 #pragma mark - List View Delegate
 
 - (void)listViewController:(ListViewController *)lvc handleObject:(id)object
@@ -121,9 +118,6 @@
 		[self.webView loadRequest:request];
 		
 		self.navigationItem.title = item.title;
-		if (popover) {
-			[popover dismissPopoverAnimated:YES];
-		}
 	}
 }
 
@@ -144,21 +138,4 @@
 	[self resetWebNavigationButtons];
 }
 
-#pragma mark - Split View Delegate
-
-- (void)splitViewController:(UISplitViewController *)svc
-	 willHideViewController:(UIViewController *)aViewController
-		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
-	   forPopoverController:(UIPopoverController *)pc
-{
-	[self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-	popover = pc;
-}
-
-- (void)splitViewController:(UISplitViewController *)svc
-	 willShowViewController:(UIViewController *)aViewController
-  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
-}
 @end

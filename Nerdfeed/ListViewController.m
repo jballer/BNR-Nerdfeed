@@ -67,7 +67,7 @@
 		
 		// Replace the WebView with this thing
 		SplitViewManager *manager = (SplitViewManager *)self.splitViewController.delegate;
-		[manager setDetailViewController:cvc];
+		manager.detailViewController = cvc;
 	}
 	else {
 		[self.navigationController pushViewController:cvc animated:YES];
@@ -240,7 +240,7 @@
 
 	if (self.splitViewController) {
 		SplitViewManager *manager = (SplitViewManager *)self.splitViewController.delegate;
-		[manager setDetailViewController:self.webViewController];
+		manager.detailViewController = self.webViewController;
 	}
 	else {
 		[self.navigationController pushViewController:self.webViewController animated:YES];
