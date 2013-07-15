@@ -55,14 +55,10 @@
 
 - (void)viewDidLoad
 {
-<<<<<<< HEAD
 	// Set up the Toolbar with back/forward buttons
 	self.navigationController.toolbarHidden = NO;
 	
 	NSLog(@"Toolbar Items at ViewDidLoad: %@", self.toolbarItems);
-=======
-	NSLog(@"%@",self.view);
->>>>>>> parent of e9f2913... Split View Controller support. Known issue: iPhone layout on iOS 7 is ambiguous at UIWindow level. Looks like an Apple bug.
 }
 
 - (void)goBack:(id)sender
@@ -85,7 +81,6 @@
 	forwardButton.enabled = self.webView.canGoForward;
 }
 
-<<<<<<< HEAD
 #pragma mark - Split View Manager
 
 - (BOOL)shouldEmbedInNavController
@@ -140,9 +135,6 @@
 }
 
 #pragma mark - Web View Delegate
-=======
-#pragma mark <UIWebViewDelegate>
->>>>>>> parent of e9f2913... Split View Controller support. Known issue: iPhone layout on iOS 7 is ambiguous at UIWindow level. Looks like an Apple bug.
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {

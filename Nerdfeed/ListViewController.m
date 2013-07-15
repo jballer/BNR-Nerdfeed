@@ -21,7 +21,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-<<<<<<< HEAD
 		self.navigationItem.backBarButtonItem.title = @"List Back";
 		
 		UIBarButtonItem *channelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Info"
@@ -31,8 +30,6 @@
 		UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithTitle:@"Test" style:UIBarButtonItemStyleBordered target:self action:@selector(showTestViewController)];
 		self.navigationItem.rightBarButtonItems = @[channelButtonItem, testButton];
 		
-=======
->>>>>>> parent of e9f2913... Split View Controller support. Known issue: iPhone layout on iOS 7 is ambiguous at UIWindow level. Looks like an Apple bug.
 		// Kick off the asynchronous data fetch
         [self fetchEntries];
     }
@@ -103,7 +100,8 @@
 {
 	// Check that we're getting the right data
 	NSString *xmlCheck = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
-	NSLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
+	
+	MyLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
 	
 	// Set up a parser
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:self.xmlData];
@@ -121,7 +119,7 @@
 	// Refresh the table data
 	[self.tableView reloadData];
 	
-	NSLog(@"%@\n %@\n %@\n", _channel, _channel.title, _channel.infoString);
+	MyLog(@"%@\n %@\n %@\n", _channel, _channel.title, _channel.infoString);
 }
 
 - (void)connection:(NSURLConnection *)connection
@@ -161,7 +159,7 @@
  qualifiedName:(NSString *)qualifiedName
 	attributes:(NSDictionary *)attributeDict
 {
-	NSLog(@"%@ found a %@ element",self,elementName);
+	ParseDebug(@"%@ found a %@ element",self,elementName);
 	
 	if ([elementName isEqualToString:@"channel"]) {
 		// Store the channel
@@ -212,7 +210,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	NSLog(@"\n\nCOUNT: %d", self.channel.items.count);
+	MyLog(@"\n\nCOUNT: %d", self.channel.items.count);
 	return self.channel.items.count;
 }
 
@@ -246,7 +244,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-<<<<<<< HEAD
 	RSSItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
 	if (self.splitViewController) {
@@ -256,12 +253,6 @@
 	else {
 		[self.navigationController pushViewController:self.webViewController animated:YES];
 	}
-=======
-	[self.navigationController pushViewController:self.webViewController animated:YES];
-	
-	RSSItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:item.link]];
->>>>>>> parent of e9f2913... Split View Controller support. Known issue: iPhone layout on iOS 7 is ambiguous at UIWindow level. Looks like an Apple bug.
 	
 	[self.webViewController listViewController:self handleObject:item];
 }

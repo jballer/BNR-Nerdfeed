@@ -34,7 +34,7 @@
  qualifiedName:(NSString *)qualifiedName
 	attributes:(NSDictionary *)attributeDict
 {
-	NSLog(@"\t%@ found a %@ element",self,elementName);
+	ParseDebug(@"\t%@ found a %@ element",self,elementName);
 	
 	/*
 	 I got stuck here because my title and infoString properties
@@ -78,7 +78,7 @@
 	if ([elementName isEqualToString:@"channel"]) {
 		[parser setDelegate:self.parentParserDelegate];
 		
-		NSLog(@"\n %@", self.items);
+		ParseDebug(@"\n %@", self.items);
 	}
 }
 
