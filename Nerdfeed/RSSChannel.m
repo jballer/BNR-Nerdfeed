@@ -27,8 +27,8 @@
 - (void)trimItemTitles
 {
 	// Make a regex with pattern: 'Author'
-	NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:@".* :: .* :: .*"
-																		 options:0 error:nil];
+	NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:@".* :: (.*) :: .*" options:0 error:nil];
+	NSRegularExpression *reg2 = [NSRegularExpression regularExpressionWithPattern:@".* :: (.*)" options:0 error:nil];
 	
 	[self.items enumerateObjectsUsingBlock:^(id obj, BOOL *stop){
 
@@ -37,11 +37,20 @@
 		NSString *itemTitle = item.title;
 		NSArray *matches = [reg matchesInString:itemTitle options:0 range:NSMakeRange(0, itemTitle.length)];
 		
-		// Print it out for debugging
-		if (matches.count) {
-			NSTextCheckingResult *result = matches.firstObject;
-			NSRange range = result.range;
-			MyLog(@"Match at {%d, %d} for %@!", range.location, range.length, itemTitle);
+		if (!([matches count]
+			  && ((NSTextCheckingResult *)[matches firstObject]).numberOfRanges == 2)) {
+			matches = [reg2 matchesInString:itemTitle options:0 range:NSMakeRange(0, itemTitle.length)];
+			MyLog(@"Matched truncated expression for:\n\t %@", itemTitle);
+		}
+		
+		for (NSTextCheckingResult *result in matches) {
+			// Capture group is a second range in the NSTextCheckingResult
+			if ([result numberOfRanges] == 2) {
+				NSRange range = [result rangeAtIndex:1];
+				MyLog(@"\t {%d, %d}: %@", range.location, range.length, [itemTitle substringWithRange:range]);
+				
+				item.title = [itemTitle substringWithRange:range];
+			}
 		}
 	}];
 }
