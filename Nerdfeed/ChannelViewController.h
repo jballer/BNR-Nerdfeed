@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ListViewController.h"
-#import "SplitViewManager.h"
+#import "JBSplitViewManager.h"
 
 @class RSSChannel;
 
-@interface ChannelViewController : UITableViewController <UISplitViewControllerDelegate, ListViewControllerDelegate, ReplaceableDetailViewController>
+@interface ChannelViewController : UITableViewController <UISplitViewControllerDelegate, ListViewControllerDelegate>
 
 @end

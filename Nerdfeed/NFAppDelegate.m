@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (nonatomic, retain) SplitViewManager *splitViewManager;
+@property (nonatomic, retain) JBSplitViewManager *splitViewManager;
 
 @end
 
@@ -41,11 +41,12 @@
 		
 		// Embed the detail webview in a nav controller
 		UISplitViewController *splitvc = [UISplitViewController new];
-		splitvc.viewControllers = @[listNav,[[UINavigationController alloc] initWithRootViewController:wvc]];
+		splitvc.viewControllers = @[listNav];
 		
 		// Set up the custom split view delegate
-		self.splitViewManager = [SplitViewManager new];
+		self.splitViewManager = [JBSplitViewManager new];
 		self.splitViewManager.splitViewController = splitvc;
+		self.splitViewManager.detailViewController = wvc;
 		
 		self.window.rootViewController = splitvc;
 	}

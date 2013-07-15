@@ -11,6 +11,7 @@
 #import "RSSItem.h"
 #import "WebViewController.h"
 #import "ChannelViewController.h"
+#import "NFTestViewController.h"
 
 //TODO: Bronze Challenge - UITableViewCell with 3 labels
 
@@ -26,12 +27,19 @@
 																			  style:UIBarButtonItemStyleBordered
 																			 target:self
 																			 action:@selector(showChannelInfo:)];
-		self.navigationItem.rightBarButtonItem = channelButtonItem;
+		UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithTitle:@"Test" style:UIBarButtonItemStyleBordered target:self action:@selector(showTestViewController)];
+		self.navigationItem.rightBarButtonItems = @[channelButtonItem, testButton];
 		
 		// Kick off the asynchronous data fetch
         [self fetchEntries];
     }
     return self;
+}
+
+- (void)showTestViewController
+{
+	UIViewController *tvc = [NFTestViewController new];
+	((JBSplitViewManager *)self.splitViewController.delegate).detailViewController = tvc;
 }
 
 - (void)fetchEntries
@@ -66,7 +74,7 @@
 		}
 		
 		// Replace the WebView with this thing
-		SplitViewManager *manager = (SplitViewManager *)self.splitViewController.delegate;
+		JBSplitViewManager *manager = (JBSplitViewManager *)self.splitViewController.delegate;
 		manager.detailViewController = cvc;
 	}
 	else {
@@ -239,7 +247,7 @@
 	RSSItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
 	if (self.splitViewController) {
-		SplitViewManager *manager = (SplitViewManager *)self.splitViewController.delegate;
+		JBSplitViewManager *manager = (JBSplitViewManager *)self.splitViewController.delegate;
 		manager.detailViewController = self.webViewController;
 	}
 	else {

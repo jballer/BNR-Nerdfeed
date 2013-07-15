@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "ListViewController.h"
-#import "SplitViewManager.h"
+#import "JBSplitViewManager.h"
 
-@interface WebViewController : UIViewController <UIWebViewDelegate, ListViewControllerDelegate, ReplaceableDetailViewController>
+@interface WebViewController : UIViewController <UIWebViewDelegate, ListViewControllerDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, strong) UIToolbar *toolbar;
 
 @end

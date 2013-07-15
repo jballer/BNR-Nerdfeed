@@ -8,41 +8,32 @@
 
 #import "WebViewController.h"
 #import "RSSItem.h"
+#import "UIViewController+JBSplitViewManager.h"
 
 @interface WebViewController ()
 {
 	UIBarButtonItem *backButton;
 	UIBarButtonItem *forwardButton;
 }
+
+@property (nonatomic, strong) UIToolbar *toolbar;
+@property (nonatomic, strong) UIBarButtonItem *splitViewBarButtonItem;
+
 @end
 
 @implementation WebViewController
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Test the left bar buttons on the nav bar
-		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:nil action:nil];
-    }
-    return self;
-}
 
 - (void)loadView
 {
 	// Content View -> WebView + Toolbar
 	
-	// Set up the content view with autolayout
-	UIView *contentView = [UIView new];
-//	contentView.backgroundColor = [UIColor redColor];
-	
 	// Set up the Web View
-	_webView = [UIWebView new];
+	_webView = [[UIWebView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
 	_webView.delegate = self;
-	_webView.scalesPageToFit = YES;
-//	_webView.backgroundColor = [UIColor yellowColor];
-	_webView.translatesAutoresizingMaskIntoConstraints = NO;
-	[contentView addSubview:_webView];
+		
+	// Test the left bar buttons on the nav bar
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:nil action:nil];
+	
 	
 	// Set up the back/forward buttons
 	backButton = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(goBack:)];
@@ -50,39 +41,24 @@
 	backButton.enabled = NO;
 	forwardButton.enabled = NO;
 	
-	// Set up the Toolbar with back/forward buttons
-	UIToolbar *toolbar = [UIToolbar new];
-//	toolbar.backgroundColor = [UIColor blueColor];
-	toolbar.translatesAutoresizingMaskIntoConstraints = NO;
-	[toolbar setItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-																	   target:nil action:nil],
-						 backButton,
-						 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-																	   target:nil action:nil],
-						 forwardButton,
-						 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-																	   target:nil action:nil]]];
-	
-	[toolbar setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
-	[contentView addSubview:toolbar];
-	
-	NSDictionary *vs = @{@"webView":_webView, @"toolbar":toolbar};
-	[contentView addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[webView][toolbar]|"
-											 options:0 metrics:nil views:vs]];
-	[contentView addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[webView]|"
-											 options:0 metrics:nil views:vs]];
-	[contentView addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[toolbar]|"
-											 options:0 metrics:nil views:vs]];
-		
-	self.view = contentView;
+
+	[self setToolbarItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																		  target:nil action:nil],
+							backButton,
+							[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+																		  target:nil action:nil],
+							forwardButton,
+							[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+																		  target:nil action:nil]]];
+	self.view = _webView;
 }
 
-- (void)viewDidLayoutSubviews
+- (void)viewDidLoad
 {
-	MyLog(@"%@",self.view);
+	// Set up the Toolbar with back/forward buttons
+	self.navigationController.toolbarHidden = NO;
+	
+	NSLog(@"Toolbar Items at ViewDidLoad: %@", self.toolbarItems);
 }
 
 - (void)goBack:(id)sender
@@ -102,11 +78,47 @@
 - (void)resetWebNavigationButtons
 {
 	backButton.enabled = self.webView.canGoBack;
-	
 	forwardButton.enabled = self.webView.canGoForward;
 }
 
-#pragma mark Reusable Detail View Controller
+#pragma mark - Split View Manager
+
+- (BOOL)shouldEmbedInNavController
+{
+	return YES;
+}
+
+- (BOOL)shouldPresentButtonAutomatically
+{
+	return NO;
+}
+
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+	NSLog(@"Set Split View Button: %@", splitViewBarButtonItem);
+	NSLog(@"Before: %@", self.toolbarItems);
+	
+	NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
+
+	if (_splitViewBarButtonItem) {
+		[items removeObject:_splitViewBarButtonItem];
+	}
+	
+	_splitViewBarButtonItem = splitViewBarButtonItem;
+
+	// If it's getting deleted, this must be called after updating the ivar to nil
+	// setToolbarItems injects the splitViewButton on its own
+	[self setToolbarItems:[items copy]];
+	NSLog(@"After: %@", self.toolbarItems);
+}
+
+- (void)setToolbarItems:(NSArray *)toolbarItems animated:(BOOL)animated
+{
+	NSMutableArray *items = [NSMutableArray arrayWithObjects:self.splitViewBarButtonItem, nil];
+	[items addObjectsFromArray:toolbarItems];
+	
+	[super setToolbarItems:items animated:animated];
+}
 
 #pragma mark - List View Delegate
 
@@ -118,6 +130,7 @@
 		[self.webView loadRequest:request];
 		
 		self.navigationItem.title = item.title;
+		self.navigationController.toolbarHidden = NO;
 	}
 }
 

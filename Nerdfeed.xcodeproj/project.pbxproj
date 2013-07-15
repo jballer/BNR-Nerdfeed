@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5022CA611791C80B006B5BDA /* ChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5022CA601791C80B006B5BDA /* ChannelViewController.m */; };
+		5022CA6717924991006B5BDA /* UIViewController+JBSplitViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5022CA661792464C006B5BDA /* UIViewController+JBSplitViewManager.m */; };
+		5022CA6A17924B0C006B5BDA /* UINavigationItem+JBSplitViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5022CA6917924B0B006B5BDA /* UINavigationItem+JBSplitViewManagerAdditions.m */; };
 		50585FD7177954F100DD4A65 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50585FD6177954F100DD4A65 /* UIKit.framework */; };
 		50585FD9177954F100DD4A65 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50585FD8177954F100DD4A65 /* Foundation.framework */; };
 		50585FDB177954F100DD4A65 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50585FDA177954F100DD4A65 /* CoreGraphics.framework */; };
@@ -19,8 +21,9 @@
 		50585FED177954F200DD4A65 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50585FEC177954F200DD4A65 /* Default-568h@2x.png */; };
 		50585FF51779551A00DD4A65 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50585FF41779551A00DD4A65 /* ListViewController.m */; };
 		5092E3FD177A2CAA0019CCD0 /* RSSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5092E3FC177A2CAA0019CCD0 /* RSSItem.m */; };
+		50A7A34117928B840060406B /* NFTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A7A34017928B840060406B /* NFTestViewController.m */; };
 		50AA617E1779FE6500B38362 /* Nerdfeed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50AA617C1779FE6500B38362 /* Nerdfeed.xcdatamodeld */; };
-		50BA807C1790094400ED9FE4 /* SplitViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BA807B1790094400ED9FE4 /* SplitViewManager.m */; };
+		50BA807C1790094400ED9FE4 /* JBSplitViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BA807B1790094400ED9FE4 /* JBSplitViewManager.m */; };
 		50C9EBAD17796E1900F8B158 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C9EBAC17796E1900F8B158 /* WebViewController.m */; };
 		50F3F8B6177A1A820079473A /* RSSChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F3F8B5177A1A820079473A /* RSSChannel.m */; };
 		50F3F8BE177A25750079473A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F3F8BD177A25750079473A /* CoreData.framework */; };
@@ -29,6 +32,10 @@
 /* Begin PBXFileReference section */
 		5022CA5F1791C80B006B5BDA /* ChannelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelViewController.h; sourceTree = "<group>"; };
 		5022CA601791C80B006B5BDA /* ChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelViewController.m; sourceTree = "<group>"; };
+		5022CA651792464C006B5BDA /* UIViewController+JBSplitViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JBSplitViewManager.h"; sourceTree = "<group>"; };
+		5022CA661792464C006B5BDA /* UIViewController+JBSplitViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JBSplitViewManager.m"; sourceTree = "<group>"; };
+		5022CA6817924B0B006B5BDA /* UINavigationItem+JBSplitViewManagerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+JBSplitViewManagerAdditions.h"; sourceTree = "<group>"; };
+		5022CA6917924B0B006B5BDA /* UINavigationItem+JBSplitViewManagerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+JBSplitViewManagerAdditions.m"; sourceTree = "<group>"; };
 		50585FD3177954F100DD4A65 /* Nerdfeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nerdfeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50585FD6177954F100DD4A65 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		50585FD8177954F100DD4A65 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -46,9 +53,11 @@
 		50585FF41779551A00DD4A65 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5092E3FB177A2CA90019CCD0 /* RSSItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSItem.h; sourceTree = "<group>"; };
 		5092E3FC177A2CAA0019CCD0 /* RSSItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RSSItem.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		50A7A33F17928B840060406B /* NFTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFTestViewController.h; sourceTree = "<group>"; };
+		50A7A34017928B840060406B /* NFTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFTestViewController.m; sourceTree = "<group>"; };
 		50AA617D1779FE6500B38362 /* Nerdfeed.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nerdfeed.xcdatamodel; sourceTree = "<group>"; };
-		50BA807A1790094400ED9FE4 /* SplitViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewManager.h; sourceTree = "<group>"; };
-		50BA807B1790094400ED9FE4 /* SplitViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewManager.m; sourceTree = "<group>"; };
+		50BA807A1790094400ED9FE4 /* JBSplitViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBSplitViewManager.h; sourceTree = "<group>"; };
+		50BA807B1790094400ED9FE4 /* JBSplitViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBSplitViewManager.m; sourceTree = "<group>"; };
 		50C9EBAB17796E1900F8B158 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		50C9EBAC17796E1900F8B158 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		50F3F8B4177A1A820079473A /* RSSChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSChannel.h; sourceTree = "<group>"; };
@@ -102,8 +111,14 @@
 		50585FDC177954F100DD4A65 /* Nerdfeed */ = {
 			isa = PBXGroup;
 			children = (
-				50BA807A1790094400ED9FE4 /* SplitViewManager.h */,
-				50BA807B1790094400ED9FE4 /* SplitViewManager.m */,
+				50A7A33F17928B840060406B /* NFTestViewController.h */,
+				50A7A34017928B840060406B /* NFTestViewController.m */,
+				5022CA651792464C006B5BDA /* UIViewController+JBSplitViewManager.h */,
+				5022CA661792464C006B5BDA /* UIViewController+JBSplitViewManager.m */,
+				5022CA6817924B0B006B5BDA /* UINavigationItem+JBSplitViewManagerAdditions.h */,
+				5022CA6917924B0B006B5BDA /* UINavigationItem+JBSplitViewManagerAdditions.m */,
+				50BA807A1790094400ED9FE4 /* JBSplitViewManager.h */,
+				50BA807B1790094400ED9FE4 /* JBSplitViewManager.m */,
 				5022CA5F1791C80B006B5BDA /* ChannelViewController.h */,
 				5022CA601791C80B006B5BDA /* ChannelViewController.m */,
 				50585FE5177954F200DD4A65 /* NFAppDelegate.h */,
@@ -203,14 +218,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				50585FE3177954F200DD4A65 /* main.m in Sources */,
+				5022CA6717924991006B5BDA /* UIViewController+JBSplitViewManager.m in Sources */,
+				5022CA6A17924B0C006B5BDA /* UINavigationItem+JBSplitViewManagerAdditions.m in Sources */,
 				50AA617E1779FE6500B38362 /* Nerdfeed.xcdatamodeld in Sources */,
 				50585FE7177954F200DD4A65 /* NFAppDelegate.m in Sources */,
 				50585FF51779551A00DD4A65 /* ListViewController.m in Sources */,
 				50C9EBAD17796E1900F8B158 /* WebViewController.m in Sources */,
 				5022CA611791C80B006B5BDA /* ChannelViewController.m in Sources */,
+				50A7A34117928B840060406B /* NFTestViewController.m in Sources */,
 				50F3F8B6177A1A820079473A /* RSSChannel.m in Sources */,
 				5092E3FD177A2CAA0019CCD0 /* RSSItem.m in Sources */,
-				50BA807C1790094400ED9FE4 /* SplitViewManager.m in Sources */,
+				50BA807C1790094400ED9FE4 /* JBSplitViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
