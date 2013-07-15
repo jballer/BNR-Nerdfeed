@@ -18,66 +18,25 @@
 
 @implementation WebViewController
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Test the left bar buttons on the nav bar
-		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:nil action:nil];
-    }
-    return self;
-}
+@synthesize webView = webView;
 
 - (void)loadView
 {
-	// Content View -> WebView + Toolbar
-	
-	// Set up the content view with autolayout
-	UIView *contentView = [UIView new];
-//	contentView.backgroundColor = [UIColor redColor];
-	
 	// Set up the Web View
-	_webView = [UIWebView new];
-	_webView.delegate = self;
-	_webView.scalesPageToFit = YES;
-//	_webView.backgroundColor = [UIColor yellowColor];
-	_webView.translatesAutoresizingMaskIntoConstraints = NO;
-	[contentView addSubview:_webView];
+	webView = [UIWebView new];
+	self.view = webView;
+}
+
+- (void)viewDidLoad
+{
+	webView.delegate = self;
+	webView.scalesPageToFit = YES;
 	
 	// Set up the back/forward buttons
 	backButton = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(goBack:)];
+	backButton.width = 44;
 	forwardButton = [[UIBarButtonItem alloc] initWithTitle:@">" style:UIBarButtonItemStyleDone target:self action:@selector(goForward:)];
-	backButton.enabled = NO;
-	forwardButton.enabled = NO;
-	
-	// Set up the Toolbar with back/forward buttons
-	UIToolbar *toolbar = [UIToolbar new];
-//	toolbar.backgroundColor = [UIColor blueColor];
-	toolbar.translatesAutoresizingMaskIntoConstraints = NO;
-	[toolbar setItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-																	   target:nil action:nil],
-						 backButton,
-						 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-																	   target:nil action:nil],
-						 forwardButton,
-						 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-																	   target:nil action:nil]]];
-	
-	[toolbar setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
-	[contentView addSubview:toolbar];
-	
-	NSDictionary *vs = @{@"webView":_webView, @"toolbar":toolbar};
-	[contentView addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[webView][toolbar]|"
-											 options:0 metrics:nil views:vs]];
-	[contentView addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[webView]|"
-											 options:0 metrics:nil views:vs]];
-	[contentView addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[toolbar]|"
-											 options:0 metrics:nil views:vs]];
-		
-	self.view = contentView;
+	forwardButton.width = 44;
 }
 
 - (void)viewDidLayoutSubviews
@@ -101,12 +60,37 @@
 
 - (void)resetWebNavigationButtons
 {
-	backButton.enabled = self.webView.canGoBack;
+//	backButton.enabled = self.webView.canGoBack;
+//	forwardButton.enabled = self.webView.canGoForward;
 	
-	forwardButton.enabled = self.webView.canGoForward;
+	UIBarButtonItem *backItem;
+	UIBarButtonItem *forwardItem;
+	
+	backItem = self.webView.canGoBack ? backButton : [self fixedSpaceWithSize:backButton.width];
+	forwardItem = self.webView.canGoForward ? forwardButton : [self fixedSpaceWithSize:forwardButton.width];
+	
+	// Place them in the toolbar provided by the navigation bar
+	[self.navigationController setToolbarHidden:(!(self.webView.canGoBack || self.webView.canGoForward)) animated:YES];
+	[self setToolbarItems:@[[self flexibleSpace],
+							backItem,
+							[self fixedSpaceWithSize:8],
+							 forwardItem]
+				  animated:YES];
 }
 
-#pragma mark Reusable Detail View Controller
+#pragma mark Helper Methods
+
+- (UIBarButtonItem *)fixedSpaceWithSize:(CGFloat)size
+{
+	UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+	fixedSpace.width = size;
+	return fixedSpace;
+}
+
+- (UIBarButtonItem *)flexibleSpace
+{
+	return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+}
 
 #pragma mark - List View Delegate
 

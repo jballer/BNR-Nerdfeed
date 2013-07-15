@@ -14,5 +14,5 @@
 #endif
 
 
-#define MyLog if(1); else NSLog
+#define MyLog if(0); else NSLog
 #define ParseDebug if(1); else NSLog

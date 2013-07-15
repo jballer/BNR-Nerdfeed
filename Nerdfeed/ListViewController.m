@@ -20,7 +20,8 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-		self.navigationItem.backBarButtonItem.title = @"List Back";
+		self.navigationItem.backBarButtonItem.title = @"RSS";
+		NSLog(@"Back item: %@\nTitle: %@", self.navigationItem.backBarButtonItem, self.navigationItem.backBarButtonItem.title);
 		
 		UIBarButtonItem *channelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Info"
 																			  style:UIBarButtonItemStyleBordered
@@ -32,6 +33,11 @@
         [self fetchEntries];
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 - (void)fetchEntries
@@ -93,7 +99,7 @@
 	// Check that we're getting the right data
 	NSString *xmlCheck = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
 	
-	MyLog(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
+	ParseDebug(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,xmlCheck);
 	
 	// Set up a parser
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:self.xmlData];
@@ -111,7 +117,7 @@
 	// Refresh the table data
 	[self.tableView reloadData];
 	
-	MyLog(@"%@\n %@\n %@\n", _channel, _channel.title, _channel.infoString);
+	ParseDebug(@"%@\n %@\n %@\n", _channel, _channel.title, _channel.infoString);
 }
 
 - (void)connection:(NSURLConnection *)connection
@@ -202,7 +208,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	MyLog(@"\n\nCOUNT: %d", self.channel.items.count);
+	ParseDebug(@"\n\nCOUNT: %d", self.channel.items.count);
 	return self.channel.items.count;
 }
 

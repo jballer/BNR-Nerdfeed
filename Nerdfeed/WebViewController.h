@@ -12,7 +12,6 @@
 
 @interface WebViewController : UIViewController <UIWebViewDelegate, ListViewControllerDelegate, ReplaceableDetailViewController>
 
-@property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, strong) UIToolbar *toolbar;
+@property (nonatomic, strong, readonly) UIWebView *webView;
 
 @end
