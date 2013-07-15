@@ -24,6 +24,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	BOOL webViewDebug = true;
+	
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
@@ -32,7 +34,11 @@
 	
 	WebViewController *wvc = [[WebViewController alloc] init];
 	lvc.webViewController = wvc;
+
+	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lvc];
+	self.window.rootViewController = nav;
 	
+<<<<<<< HEAD
 	// Embed the list in a nav controller
 	UINavigationController *listNav = [[UINavigationController alloc] initWithRootViewController:lvc];		
 	
@@ -52,6 +58,11 @@
 	}
 	else {
 		self.window.rootViewController = listNav;
+=======
+	//TODO: remove web view debug code
+	if (webViewDebug) {
+		nav.viewControllers = @[wvc];
+>>>>>>> parent of e9f2913... Split View Controller support. Known issue: iPhone layout on iOS 7 is ambiguous at UIWindow level. Looks like an Apple bug.
 	}
 	
     self.window.backgroundColor = [UIColor whiteColor];
@@ -91,7 +102,7 @@
 		 
 		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
 		 */
-		MyLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
 }
@@ -152,7 +163,7 @@
          
          abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
          */
-        MyLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
 	
