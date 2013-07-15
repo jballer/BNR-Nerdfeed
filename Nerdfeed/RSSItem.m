@@ -29,7 +29,7 @@
  qualifiedName:(NSString *)qualifiedName
 	attributes:(NSDictionary *)attributeDict
 {
-	ParseDebug(@"\t\t%@ found a %@ element",self,elementName);
+	NSLog(@"\t\t%@ found a %@ element",self,elementName);
 	
 	if ([elementName isEqualToString:@"title"] ||
 		[elementName isEqualToString:@"link"] ||
@@ -68,7 +68,7 @@
 		// EEE, d MMM yyyy HH:mm:ss zzz
 		[formatter setDateFormat:@"EEE, d MMM yyyy HH:mm:ss zzz"];
 		self.date = [formatter dateFromString:currentString];
-		ParseDebug(@"Current String: %@\nDate Representation: %@", currentString, self.date);
+		NSLog(@"Current String: %@\nDate Representation: %@", currentString, self.date);
 	}
 	
 	currentString = nil;

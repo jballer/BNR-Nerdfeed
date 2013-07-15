@@ -12,7 +12,3 @@
 	#import <UIKit/UIKit.h>
 	#import <Foundation/Foundation.h>
 #endif
-
-
-#define MyLog if(1); else NSLog
-#define ParseDebug if(1); else NSLog
