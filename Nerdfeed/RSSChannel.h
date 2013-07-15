@@ -26,4 +26,6 @@
 - (void)addItems:(NSSet *)values;
 - (void)removeItems:(NSSet *)values;
 
+- (void)trimItemTitles;
+
 @end

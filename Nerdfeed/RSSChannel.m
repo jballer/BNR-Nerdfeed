@@ -23,6 +23,29 @@
 @dynamic title;
 @dynamic items;
 
+#pragma mark Regular Expressions
+- (void)trimItemTitles
+{
+	// Make a regex with pattern: 'Author'
+	NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:@".* :: .* :: .*"
+																		 options:0 error:nil];
+	
+	[self.items enumerateObjectsUsingBlock:^(id obj, BOOL *stop){
+
+		// Check for match
+		RSSItem *item = (RSSItem *)obj;
+		NSString *itemTitle = item.title;
+		NSArray *matches = [reg matchesInString:itemTitle options:0 range:NSMakeRange(0, itemTitle.length)];
+		
+		// Print it out for debugging
+		if (matches.count) {
+			NSTextCheckingResult *result = matches.firstObject;
+			NSRange range = result.range;
+			MyLog(@"Match at {%d, %d} for %@!", range.location, range.length, itemTitle);
+		}
+	}];
+}
+
 #pragma mark <NSXMLParserDelegate>
 
 /*
@@ -77,7 +100,7 @@
 	// If that's the end of the channel, pass it back to our parent to close out.
 	if ([elementName isEqualToString:@"channel"]) {
 		[parser setDelegate:self.parentParserDelegate];
-		
+		[self trimItemTitles];
 		ParseDebug(@"\n %@", self.items);
 	}
 }

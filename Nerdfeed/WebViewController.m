@@ -65,7 +65,9 @@
 	
 	UIBarButtonItem *backItem;
 	UIBarButtonItem *forwardItem;
-	
+
+	// Intrinsic button widths aren't available with a public API, so I set them manually.
+	// One alternative is to use KVC to get the frame of the UIBarButtonItem's 'view' ivar.
 	backItem = self.webView.canGoBack ? backButton : [self fixedSpaceWithSize:backButton.width];
 	forwardItem = self.webView.canGoForward ? forwardButton : [self fixedSpaceWithSize:forwardButton.width];
 	
