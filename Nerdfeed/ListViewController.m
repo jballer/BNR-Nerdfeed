@@ -50,6 +50,8 @@
 				  @"http://forums.bignerdranch.com/smartfeed.php?"
 				  @"limit=1_DAY&sort_by=standard&feed_type=RSS2.0&feed_style=COMPACT"];
 	
+	// can generate a more comprehensive RSS feed in the forum's "smartfeed" settings
+	
 	// Apple's "Hot News" feed
 	//	NSURL *url2 = [NSURL URLWithString:@"http://www.apple.com/pr/feeds/pr.rss"];
 	
