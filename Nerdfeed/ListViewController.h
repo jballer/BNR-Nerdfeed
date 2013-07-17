@@ -17,9 +17,6 @@
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
-@property (nonatomic, strong) NSURLConnection *connection;
-@property (nonatomic, strong) NSMutableData *xmlData;
-
 @property (nonatomic, strong) RSSChannel *channel;
 
 @property (nonatomic, strong) WebViewController *webViewController;

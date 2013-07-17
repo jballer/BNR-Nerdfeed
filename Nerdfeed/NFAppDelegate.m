@@ -9,6 +9,7 @@
 #import "NFAppDelegate.h"
 #import "ListViewController.h"
 #import "WebViewController.h"
+#import "BNRFeedStore.h"
 
 @interface NFAppDelegate ()
 
@@ -26,7 +27,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-
+	
+	// Set up the store
+	[BNRFeedStore sharedStore].managedObjectContext = self.managedObjectContext;
+	
 	ListViewController *lvc = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
 	lvc.managedObjectContext = self.managedObjectContext;
 	
