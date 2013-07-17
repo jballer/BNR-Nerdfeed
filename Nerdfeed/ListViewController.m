@@ -71,11 +71,11 @@
 		}
 	};
 	
-	if (self.rssType == ListViewControllerRSSTypeBNR) {
+	if (ListViewControllerRSSTypeBNR == self.rssType) {
 		[[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:completionBlock];
 	}
-	else {
-		[[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:completionBlock];
+	else if (ListViewControllerRSSTypeApple == self.rssType) {
+		[[BNRFeedStore sharedStore] fetchTopSongs:15 withCompletion:completionBlock];
 	}
 }
 
