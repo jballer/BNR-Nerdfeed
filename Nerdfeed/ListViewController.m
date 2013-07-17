@@ -16,6 +16,9 @@
 //TODO: Bronze Challenge - UITableViewCell with 3 labels
 
 @implementation ListViewController
+{
+	UISegmentedControl *rssTypePicker;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,6 +32,14 @@
 																			 target:self
 																			 action:@selector(showChannelInfo:)];
 		self.navigationItem.rightBarButtonItem = channelButtonItem;
+		
+		rssTypePicker = [[UISegmentedControl alloc] initWithItems:@[@"BNR",@"Apple"]];
+		[rssTypePicker addTarget:self
+						  action:@selector(chooseFeedType:)
+				forControlEvents:UIControlEventValueChanged];
+		rssTypePicker.selectedSegmentIndex = 0;
+		rssTypePicker.segmentedControlStyle = UISegmentedControlStyleBar;
+		self.navigationItem.titleView = rssTypePicker;
 		
 		// Kick off the asynchronous data fetch
         [self fetchEntries];
@@ -44,7 +55,7 @@
 - (void)fetchEntries
 {	
 	// Initiate a request
-	[[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:^(RSSChannel *channel, NSError *error) {
+	void (^completionBlock)(RSSChannel *, NSError *) = ^(RSSChannel *channel, NSError *error){
 		if (!error) {
 			self.channel = channel;
 			
@@ -52,13 +63,28 @@
 		}
 		else {
 			[[[UIAlertView alloc] initWithTitle:@"Error"
-									   message:[error localizedDescription]
-									  delegate:nil
-							 cancelButtonTitle:@"OK"
+										message:[error localizedDescription]
+									   delegate:nil
+							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil]
 			 show];
 		}
-	}];
+	};
+	
+	if (self.rssType == ListViewControllerRSSTypeBNR) {
+		[[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:completionBlock];
+	}
+	else {
+		[[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:completionBlock];
+	}
+}
+
+- (void)chooseFeedType:(id)sender
+{
+	if (sender == rssTypePicker) {
+		self.rssType = rssTypePicker.selectedSegmentIndex;
+		[self fetchEntries];
+	}
 }
 
 - (void)showChannelInfo:(id)sender

@@ -22,6 +22,8 @@
 		50AA617E1779FE6500B38362 /* Nerdfeed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50AA617C1779FE6500B38362 /* Nerdfeed.xcdatamodeld */; };
 		50BA807C1790094400ED9FE4 /* SplitViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BA807B1790094400ED9FE4 /* SplitViewManager.m */; };
 		50C9EBAD17796E1900F8B158 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C9EBAC17796E1900F8B158 /* WebViewController.m */; };
+		50D5E7301794FB4900E250E2 /* BNRFeedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D5E72F1794FB4900E250E2 /* BNRFeedStore.m */; };
+		50D5E7351795041400E250E2 /* BNRConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D5E7341795041400E250E2 /* BNRConnection.m */; };
 		50F3F8B6177A1A820079473A /* RSSChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F3F8B5177A1A820079473A /* RSSChannel.m */; };
 		50F3F8BE177A25750079473A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F3F8BD177A25750079473A /* CoreData.framework */; };
 /* End PBXBuildFile section */
@@ -51,6 +53,10 @@
 		50BA807B1790094400ED9FE4 /* SplitViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewManager.m; sourceTree = "<group>"; };
 		50C9EBAB17796E1900F8B158 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		50C9EBAC17796E1900F8B158 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		50D5E72E1794FB4900E250E2 /* BNRFeedStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRFeedStore.h; sourceTree = "<group>"; };
+		50D5E72F1794FB4900E250E2 /* BNRFeedStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRFeedStore.m; sourceTree = "<group>"; };
+		50D5E7331795041400E250E2 /* BNRConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRConnection.h; sourceTree = "<group>"; };
+		50D5E7341795041400E250E2 /* BNRConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRConnection.m; sourceTree = "<group>"; };
 		50F3F8B4177A1A820079473A /* RSSChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSChannel.h; sourceTree = "<group>"; };
 		50F3F8B5177A1A820079473A /* RSSChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RSSChannel.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		50F3F8BD177A25750079473A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -102,21 +108,10 @@
 		50585FDC177954F100DD4A65 /* Nerdfeed */ = {
 			isa = PBXGroup;
 			children = (
-				50BA807A1790094400ED9FE4 /* SplitViewManager.h */,
-				50BA807B1790094400ED9FE4 /* SplitViewManager.m */,
-				5022CA5F1791C80B006B5BDA /* ChannelViewController.h */,
-				5022CA601791C80B006B5BDA /* ChannelViewController.m */,
 				50585FE5177954F200DD4A65 /* NFAppDelegate.h */,
 				50585FE6177954F200DD4A65 /* NFAppDelegate.m */,
-				50AA617C1779FE6500B38362 /* Nerdfeed.xcdatamodeld */,
-				5092E3FB177A2CA90019CCD0 /* RSSItem.h */,
-				5092E3FC177A2CAA0019CCD0 /* RSSItem.m */,
-				50F3F8B4177A1A820079473A /* RSSChannel.h */,
-				50F3F8B5177A1A820079473A /* RSSChannel.m */,
-				50585FF31779551A00DD4A65 /* ListViewController.h */,
-				50585FF41779551A00DD4A65 /* ListViewController.m */,
-				50C9EBAB17796E1900F8B158 /* WebViewController.h */,
-				50C9EBAC17796E1900F8B158 /* WebViewController.m */,
+				50D5E7311794FB6100E250E2 /* Model */,
+				50D5E7321794FB8F00E250E2 /* Controllers */,
 				50585FDD177954F100DD4A65 /* Supporting Files */,
 			);
 			path = Nerdfeed;
@@ -134,6 +129,37 @@
 				50585FEC177954F200DD4A65 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		50D5E7311794FB6100E250E2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				50D5E72E1794FB4900E250E2 /* BNRFeedStore.h */,
+				50D5E72F1794FB4900E250E2 /* BNRFeedStore.m */,
+				50AA617C1779FE6500B38362 /* Nerdfeed.xcdatamodeld */,
+				5092E3FB177A2CA90019CCD0 /* RSSItem.h */,
+				5092E3FC177A2CAA0019CCD0 /* RSSItem.m */,
+				50F3F8B4177A1A820079473A /* RSSChannel.h */,
+				50F3F8B5177A1A820079473A /* RSSChannel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		50D5E7321794FB8F00E250E2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				50BA807A1790094400ED9FE4 /* SplitViewManager.h */,
+				50BA807B1790094400ED9FE4 /* SplitViewManager.m */,
+				5022CA5F1791C80B006B5BDA /* ChannelViewController.h */,
+				5022CA601791C80B006B5BDA /* ChannelViewController.m */,
+				50585FF31779551A00DD4A65 /* ListViewController.h */,
+				50585FF41779551A00DD4A65 /* ListViewController.m */,
+				50C9EBAB17796E1900F8B158 /* WebViewController.h */,
+				50C9EBAC17796E1900F8B158 /* WebViewController.m */,
+				50D5E7331795041400E250E2 /* BNRConnection.h */,
+				50D5E7341795041400E250E2 /* BNRConnection.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,8 +230,10 @@
 			files = (
 				50585FE3177954F200DD4A65 /* main.m in Sources */,
 				50AA617E1779FE6500B38362 /* Nerdfeed.xcdatamodeld in Sources */,
+				50D5E7301794FB4900E250E2 /* BNRFeedStore.m in Sources */,
 				50585FE7177954F200DD4A65 /* NFAppDelegate.m in Sources */,
 				50585FF51779551A00DD4A65 /* ListViewController.m in Sources */,
+				50D5E7351795041400E250E2 /* BNRConnection.m in Sources */,
 				50C9EBAD17796E1900F8B158 /* WebViewController.m in Sources */,
 				5022CA611791C80B006B5BDA /* ChannelViewController.m in Sources */,
 				50F3F8B6177A1A820079473A /* RSSChannel.m in Sources */,

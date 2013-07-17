@@ -16,6 +16,8 @@
 
 + (BNRFeedStore *)sharedStore;
 
-- (void)fetchRSSFeedWithCompletion:(void (^)(RSSChannel *channel, NSError *error))block;
+- (void)fetchTopSongs:(int)count withCompletion:(void(^)(RSSChannel *channel, NSError *error))completionBlock;
+
+- (void)fetchRSSFeedWithCompletion:(void (^)(RSSChannel *channel, NSError *error))completionBlock;
 
 @end

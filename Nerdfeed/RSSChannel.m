@@ -83,7 +83,7 @@
 		currentString = [[NSMutableString alloc] init];
 		self.infoString = currentString;
 	}
-	else if ([elementName isEqualToString:@"item"])
+	else if ([@[@"item",@"element"] containsObject:elementName])
 	{
 		RSSItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"RSSItem" inManagedObjectContext:self.managedObjectContext];
 		item.parentParserDelegate = self;

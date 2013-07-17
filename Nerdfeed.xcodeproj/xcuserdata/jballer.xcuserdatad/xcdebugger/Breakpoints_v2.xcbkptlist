@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nerdfeed/ListViewController.m"
-            timestampString = "395318599.901175"
+            timestampString = "395781654.994648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "-fetchedResultsController"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nerdfeed/WebViewController.m"
-            timestampString = "395435064.564738"
+            timestampString = "395648769.040222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
@@ -79,7 +79,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "162"
-            endingLineNumber = "162">
+            endingLineNumber = "162"
+            landmarkName = "-navigationController:didShowViewController:animated:"
+            landmarkType = "5">
             <Actions>
                <BreakpointActionProxy
                   ActionExtensionID = "Xcode.BreakpointAction.Log">
@@ -119,7 +121,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78"
-            landmarkName = "-setPersistentBarButtonItem:forDetailViewController:"
+            landmarkName = "-setDetailViewController:updatingSplitView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -135,8 +137,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
             endingLineNumber = "38"
-            landmarkName = "-setDetailViewController:updatingSplitView:"
-            landmarkType = "5">
+            landmarkName = "@implementation SplitViewManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -152,6 +154,22 @@
             startingLineNumber = "21"
             endingLineNumber = "21"
             landmarkName = "-shouldEmbedViewController:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nerdfeed/WebViewController.m"
+            timestampString = "395648769.040222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-updateWebNavigationButtons"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

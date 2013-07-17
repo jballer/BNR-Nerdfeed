@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#define RSSItemSupportedElementNames @[@"item",@"entry"]
+
 @class RSSChannel;
 
 @interface RSSItem : NSManagedObject <NSXMLParserDelegate>
