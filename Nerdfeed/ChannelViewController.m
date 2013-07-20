@@ -40,8 +40,8 @@ static NSString *kChannelCellIdentifier = @"ChannelInfoCell";
  */
 - (void)setChannel:(RSSChannel *)channel
 {
-	self.cellContents = @{@"Title":channel.title,
-						  @"Info":channel.infoString};
+	self.cellContents = @{@"Title":[NSString stringWithFormat:@"%@",channel.title],
+						  @"Info":[NSString stringWithFormat:@"%@",channel.infoString]};
 	_channel = channel;
 }
 

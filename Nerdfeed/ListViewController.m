@@ -59,6 +59,10 @@
 		if (!error) {
 			self.channel = channel;
 			
+			self.fetchedResultsController.fetchRequest.predicate = [NSPredicate predicateWithFormat:@"channel == %@", self.channel];
+			
+			NSError *err = [NSError new];
+			[self.fetchedResultsController performFetch:&err];
 			[[self tableView] reloadData];
 		}
 		else {
@@ -69,6 +73,8 @@
 							  otherButtonTitles:nil]
 			 show];
 		}
+
+		[self logNumberOfChannelsAndItems];
 	};
 	
 	if (ListViewControllerRSSTypeBNR == self.rssType) {
@@ -77,6 +83,26 @@
 	else if (ListViewControllerRSSTypeApple == self.rssType) {
 		[[BNRFeedStore sharedStore] fetchTopSongs:15 withCompletion:completionBlock];
 	}
+}
+
+- (void)logNumberOfChannelsAndItems
+{
+	static NSFetchRequest *channelsRequest;
+	static NSFetchRequest *itemsRequest;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		channelsRequest = [[NSFetchRequest alloc] initWithEntityName:@"RSSChannel"];
+		channelsRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"title" ascending:NO]];
+		
+		itemsRequest = [[NSFetchRequest alloc] initWithEntityName:@"RSSItem"];
+		itemsRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"title" ascending:NO]];
+	});
+	
+	NSError *err = [NSError new];
+	NSArray *channels = [self.managedObjectContext executeFetchRequest:channelsRequest error:&err];
+	NSArray *items = [self.managedObjectContext executeFetchRequest:itemsRequest error:&err];
+	NSLog(@"%d Items in %d Channels", items.count, channels.count);
 }
 
 - (void)chooseFeedType:(id)sender
@@ -120,10 +146,14 @@
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"RSSItem" inManagedObjectContext:self.managedObjectContext];
 	request.entity = entity;
 	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"channel == %@", self.channel];
+	request.predicate = predicate;
+	
 	NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
 	request.sortDescriptors = @[descriptor];
 	
 	_fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+	_fetchedResultsController.delegate = self;
 	
 	NSError *error = [NSError new];
 	[_fetchedResultsController performFetch:&error];
@@ -131,12 +161,72 @@
 	return _fetchedResultsController;
 }
 
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+		   atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+	
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+						  withRowAnimation:UITableViewRowAnimationFade];
+            break;
+			
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+						  withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+	   atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+	  newIndexPath:(NSIndexPath *)newIndexPath {
+	
+    UITableView *tableView = self.tableView;
+	
+    switch(type) {
+			
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+							 withRowAnimation:UITableViewRowAnimationFade];
+            break;
+			
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+							 withRowAnimation:UITableViewRowAnimationFade];
+            break;
+			
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+							 withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+							 withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+	// Empty implementation sufficient for change tracking
+	NSLog(@"Fetched Results Controller Changed.");
+
+	[self.tableView endUpdates];
+}
+
 #pragma mark <UITableViewDataSource>
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	ParseDebug(@"\n\nCOUNT: %d", self.channel.items.count);
-	return self.channel.items.count;
+	
+	id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections objectAtIndex:section];
+	return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView

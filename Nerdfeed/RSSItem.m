@@ -18,6 +18,25 @@
 @dynamic date;
 @dynamic channel;
 
+#pragma mark JSON
+
+- (void)readFromJSONDictionary:(NSDictionary *)dictionary
+{
+	self.title = [dictionary valueForKeyPath:@"title.label"];
+//	MyLog(@"Title: %@", self.title);
+	
+	// Array of links
+	NSArray *links = dictionary[@"link"];
+	if (links.count > 1) {
+		NSDictionary *sampleDictionary = links[1][@"attributes"];
+		
+		self.link = sampleDictionary[@"href"];
+//		MyLog(@"Link: %@", self.link);
+	}
+	MyLog(@"For Dictionary:\n%@", dictionary);
+}
+
+#pragma mark - XML
 #pragma mark <NSXMLParserDelegate>
 
 /*

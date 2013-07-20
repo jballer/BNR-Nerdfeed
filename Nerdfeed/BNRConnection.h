@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONSerializable.h"
 
 @interface BNRConnection : NSObject  <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 {
@@ -19,6 +20,7 @@
 @property (nonatomic, copy) NSURLRequest *request;
 @property (nonatomic, copy) void (^completionBlock)(id obj, NSError *err);
 @property (nonatomic, strong) id <NSXMLParserDelegate> xmlRootObject;
+@property (nonatomic, strong) id <JSONSerializable> jsonRootObject;
 
 - (void)start;
 

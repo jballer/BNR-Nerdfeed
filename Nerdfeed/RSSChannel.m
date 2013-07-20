@@ -55,6 +55,28 @@
 	}];
 }
 
+#pragma mark - JSON
+
+- (void)readFromJSONDictionary:(NSDictionary *)dictionary
+{
+	NSDictionary *feed = dictionary[@"feed"];
+	
+	// Feed has a title property
+	self.title = [feed valueForKeyPath:@"title.label"];
+	self.infoString = [feed valueForKeyPath:@"rights.label"];
+	
+	// Feed has an array of entries. Make an RSSItem for each.
+	NSArray *entries = feed[@"entry"];
+	for (NSDictionary *d in entries) {
+		RSSItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"RSSItem" inManagedObjectContext:self.managedObjectContext];
+		[item readFromJSONDictionary:d];
+		
+		[self addItemsObject:item]; // This is the method for Core Data set access
+	}
+	MyLog(@"Channel Items: %@", self.items);
+}
+
+#pragma mark - XML
 #pragma mark <NSXMLParserDelegate>
 
 /*

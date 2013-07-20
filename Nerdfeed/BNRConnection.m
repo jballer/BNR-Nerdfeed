@@ -52,7 +52,9 @@ static NSMutableArray *sharedConnectionList = nil;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)conn
 {
-	if (self.xmlRootObject) {
+	id rootObject;
+	
+	if ((rootObject = self.xmlRootObject)) {
 		// Make a parser with the data contents, and pass it to the parser
 		NSXMLParser *parser = [[NSXMLParser alloc] initWithData:container];
 		ParseDebug(@"XML Received from\n\n<   %@   >\n\n%@",conn.currentRequest.URL,[[NSString alloc] initWithData:container encoding:NSUTF8StringEncoding]);
@@ -60,10 +62,16 @@ static NSMutableArray *sharedConnectionList = nil;
 		parser.delegate = self.xmlRootObject;
 		[parser parse];
 	}
+	else if ((rootObject = self.jsonRootObject)) {
+		// Make the JSON data into model objects
+		NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:container options:0 error:nil];
+		
+		[[self jsonRootObject] readFromJSONDictionary:dictionary];
+	}
 	
 	// Execute the completion block, supplying the root object
-	if ([self completionBlock]) {
-		[self completionBlock](self.xmlRootObject, nil);
+	if (self.completionBlock) {
+		self.completionBlock(rootObject, nil);
 	}
 	
 	// Detroy the connection

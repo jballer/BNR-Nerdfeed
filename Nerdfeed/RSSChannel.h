@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "JSONSerializable.h"
 
-
-@interface RSSChannel : NSManagedObject <NSXMLParserDelegate>
+@interface RSSChannel : NSManagedObject <NSXMLParserDelegate, JSONSerializable>
 
 @property (nonatomic, weak) id<NSXMLParserDelegate> parentParserDelegate;
 

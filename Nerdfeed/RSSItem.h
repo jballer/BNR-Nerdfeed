@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "JSONSerializable.h"
 
 #define RSSItemSupportedElementNames @[@"item",@"entry"]
 
 @class RSSChannel;
 
-@interface RSSItem : NSManagedObject <NSXMLParserDelegate>
+@interface RSSItem : NSManagedObject <NSXMLParserDelegate, JSONSerializable>
 {
 	NSMutableString *currentString;
 }
