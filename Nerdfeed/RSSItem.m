@@ -22,8 +22,17 @@
 
 - (void)readFromJSONDictionary:(NSDictionary *)dictionary
 {
+	static NSDateFormatter *df;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		df = [NSDateFormatter new];
+		[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+	});
+	
 	self.title = [dictionary valueForKeyPath:@"title.label"];
-//	MyLog(@"Title: %@", self.title);
+	
+	NSString *dateString = dictionary[@"im:releaseDate"][@"label"];
+	self.date = [df dateFromString:dateString];
 	
 	// Array of links
 	NSArray *links = dictionary[@"link"];
@@ -31,7 +40,6 @@
 		NSDictionary *sampleDictionary = links[1][@"attributes"];
 		
 		self.link = sampleDictionary[@"href"];
-//		MyLog(@"Link: %@", self.link);
 	}
 	MyLog(@"For Dictionary:\n%@", dictionary);
 }
